@@ -1,6 +1,13 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 
+#include <string>
+#include "Card.h"
+#include <vector>
+#include <deque>
+#include "CardFactory.hpp"
+#include "PlayersFactory.hpp"
+
 class Mtmchkin{
 
 public:
@@ -12,7 +19,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    Mtmchkin(const string fileName);
+    Mtmchkin(const std::string fileName);
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -46,6 +53,23 @@ public:
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
+
+private:
+    std::deque<Card*> m_cardDeck;
+    std::deque<Player*> m_players;
+    std::unordered_map<std::string, cFactory*> cardsMap;
+    std::unordered_map<std::string, pFactory*> playersMap;
+    std::deque<Player*> m_winners;
+    std::deque<Player*> m_losers;
+
+    int m_roundCounter;
+    int m_numOfPlayers;
+
+    void getCardDeck(const std::string& fileName);
+    void getPlayers();
+    void playNextCard(Player& somePlayer);
+    bool checkName(std::string& name);
+    bool checkClass(std::string& playerClass);
 };
 
 
