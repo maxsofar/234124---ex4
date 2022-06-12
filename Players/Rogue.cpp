@@ -1,8 +1,7 @@
 #include "Rogue.h"
-#include "utilities.h"
 
 Rogue::Rogue(std::string playerName)
-        : Player(playerName, Character::Rogue)
+        : Player(std::move(playerName), Character::Rogue)
 {}
 
 void Rogue::addCoins(int amount)

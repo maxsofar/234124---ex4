@@ -23,8 +23,20 @@ public:
 
     ~HealthPoints() = default;
 
+    /*
+     * Returns current HP
+     *
+     * @return
+     *      HP of player
+    */
     int getHP() const;
 
+    /*
+     * Returns current the maximal HP
+     *
+     * @return
+     *      maximal HP of player
+    */
     int getMaxHP() const;
 
     /*

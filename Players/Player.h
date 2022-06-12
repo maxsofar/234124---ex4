@@ -8,64 +8,46 @@ enum class Character{Wizard, Rogue, Fighter};
 
 class Player {
 public:
-    /*
-     * C'tor of the player:
-     *
-     * @param playerName   - The name of the player.
-     * @param initialForce - Initial force value of the player.
-     * @param maxHP        - The maximum value of HP for the player.
-     * @result
-     *      An instance of Player
-     */
-    Player(std::string playerName, Character someCharacter);
 
     /*
-     * Default D'tor, copy C'tor, assignment operator overload
-     */
-    virtual ~Player() = default;
-
-    Player(const Player &) = default;
-
-    Player &operator=(const Player &) = default;
-
-    std::string whatCharacter() const;
-
-    std::string getName() const;
-
-    int getCoins() const;
-
-    int getHP() const;
-
-    /*
-     * Print the following player parameters:
-     *  - Name
-     *  - Level
-     *  - Force
-     *  - HP
-     *  - Coins
+     * Returns the name of the player's character
      *
      * @return
-     *      void
+     *      String with name of a character
      */
-    void printInfo();
+    std::string getCharacter() const;
 
     /*
-     * Promote the player one level
+     * Returns the name of the player
+     *
+     * @return
+     *      String with name of a player
+     */
+    std::string getName() const;
+
+    /*
+     * Returns the amount of player's coins
+     *
+     * @return
+     *      Amount of coins
+     */
+    int getCoins() const;
+
+    /*
+     * Promotes the player one level
      *
      * @return
      *      void
      */
     void levelUp();
 
-    void loseForce();
-
     /*
-     * Get the player's current level:
+     * Decreases player's force one point
      *
      * @return
-     *      the current level of the player
+     *      void
      */
-    int getLevel();
+    void loseForce();
 
     /*
      * Increase the player's force by given number of points
@@ -75,6 +57,14 @@ public:
      *      void
      */
     void buff(int buffVal);
+
+    /*
+     * Get the player's current level:
+     *
+     * @return
+     *      the current level of the player
+     */
+    int getLevel() const;
 
     /*
      * Increase the player's HP by given number of points with the limit of maxHP
@@ -101,7 +91,7 @@ public:
      *      True if player's HP amount is 0
      *      False otherwise
      */
-    bool isKnockedOut();
+    bool isKnockedOut() const;
 
     /*
      * Increase the amount of player's coins by given number
@@ -131,20 +121,37 @@ public:
     virtual int getAttackStrength();
 
 protected:
+    /*
+     * C'tor of the player:
+     *
+     * @param playerName    - The name of the player.
+     * @param someCharacter - Enum representation of one's of the game characters.
+     * @return
+     *      An instance of Player
+     */
+    Player(std::string playerName, Character someCharacter);
+
+    /*
+     * Default D'tor, copy C'tor, assignment operator overload
+     */
+    virtual ~Player() = default;
+
+    Player(const Player &) = default;
+
+    Player &operator=(const Player &) = default;
+
     std::string m_name;
     int m_level;
     int m_force;
     HealthPoints m_HP;
     int m_coins;
     Character m_character;
-    int m_rank;
 
 private:
     static const int DEFAULT_FORCE = 5;
     static const int INITIAL_LEVEL = 1;
     static const int MAX_LEVEL = 10;
     static const int INITIAL_COINS_AMOUNT = 10;
-    int m_maxHP; //TODO: Check if needed
 
     friend std::ostream& operator<<(std::ostream& os, const Player& somePlayer);
 };

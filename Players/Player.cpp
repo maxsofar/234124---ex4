@@ -1,12 +1,13 @@
 #include "Player.h"
+#include <utility>
 #include "utilities.h"
 
 Player::Player(std::string playerName, Character someCharacter)
-        : m_name(playerName), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
-        m_coins(INITIAL_COINS_AMOUNT), m_character(someCharacter), m_rank(0)
+        : m_name(std::move(playerName)), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
+        m_coins(INITIAL_COINS_AMOUNT), m_character(someCharacter)
 {}
 
-std::string Player::whatCharacter() const
+std::string Player::getCharacter() const
 {
     switch (m_character) {
 
@@ -18,14 +19,6 @@ std::string Player::whatCharacter() const
             return "Fighter";
     }
 }
-
-/*
-void Player::printInfo() {
-    const char *name = m_name.c_str();
-    const char *job = m_name.c_str();
-    printPlayerInfo(name, m_level, m_force, m_HP, m_coins);
-}
-*/
 
 std::string Player::getName() const
 {
@@ -44,14 +37,11 @@ void Player::levelUp()
     }
 }
 
-int Player::getLevel()
+void Player::loseForce()
 {
-    return m_level;
-}
-
-int Player::getHP() const
-{
-    return m_HP.getHP();
+    if (m_force > 0) {
+        --m_force;
+    }
 }
 
 void Player::buff(int buffVal)
@@ -60,6 +50,11 @@ void Player::buff(int buffVal)
         return;
     }
     m_force += buffVal;
+}
+
+int Player::getLevel() const
+{
+    return m_level;
 }
 
 void Player::heal(int hpAmount)
@@ -85,14 +80,7 @@ void Player::damage(int damageVal)
     }
 }
 
-void Player::loseForce()
-{
-    if (m_force > 0) {
-        --m_force;
-    }
-}
-
-bool Player::isKnockedOut()
+bool Player::isKnockedOut() const
 {
     if (m_HP.getHP()) {
         return false;
@@ -128,7 +116,7 @@ int Player::getAttackStrength()
 
 std::ostream& operator<<(std::ostream& os, const Player& somePlayer)
 {
-    printPlayerDetails(os, somePlayer.m_name, somePlayer.whatCharacter(), somePlayer.m_level, somePlayer.m_force,
+    printPlayerDetails(os, somePlayer.m_name, somePlayer.getCharacter(), somePlayer.m_level, somePlayer.m_force,
                        somePlayer.m_HP.getHP(), somePlayer.m_coins);
     return os;
 }

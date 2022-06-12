@@ -1,7 +1,7 @@
 #include "Fighter.h"
 
 Fighter::Fighter(std::string playerName)
-        : Player(playerName, Character::Fighter)
+        : Player(std::move(playerName), Character::Fighter)
 {}
 
 int Fighter::getAttackStrength()

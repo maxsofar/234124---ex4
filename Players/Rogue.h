@@ -5,14 +5,30 @@
 
 class Rogue : public Player {
 public:
-    Rogue(std::string playerName);
-    ~Rogue() = default;
+    /*
+     * C'tor of the Rogue:
+     *
+     * @param playerName  - The name of the player.
+     * @return
+     *      An instance of Rogue
+     */
+    explicit Rogue(std::string playerName);
+
+    /*
+     * Default D'tor, copy C'tor, assignment operator overload
+     */
+    ~Rogue() override = default;
     Rogue(const Rogue&) = default;
     Rogue& operator=(const Rogue&) = default;
+
+    /*
+     * Increase the amount of player's coins by given number
+     * @param amount - number of coins to be added
+     *
+     * @return
+     *      void
+     */
     void addCoins(int amount) override;
-
-
-private:
 };
 
 #endif //EX4_ROGUE_H

@@ -7,7 +7,7 @@ Barfight::Barfight() : Card(CardType::Barfight, barfightStats, "Barfight")
 
 void Barfight::applyEncounter(Player &player)
 {
-    if (player.whatCharacter() == "Fighter") {
+    if (player.getCharacter() == "Fighter") {
         printBarfightMessage(true);
     } else {
         player.damage(m_stats.hpLossOnDefeat);
