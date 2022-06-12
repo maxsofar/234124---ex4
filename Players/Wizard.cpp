@@ -1,13 +1,11 @@
 #include "Wizard.h"
-#include "utilities.h"
 
 Wizard::Wizard(std::string playerName)
-    : Player(playerName, Character::Wizard)
+    : Player(std::move(playerName), Character::Wizard)
 {}
 
 void Wizard::heal(int hpAmount)
 {
-
     if (hpAmount < 0) {
         return;
     }

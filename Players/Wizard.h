@@ -5,13 +5,29 @@
 
 class Wizard : public Player {
 public:
-    Wizard(std::string playerName);
-    ~Wizard() = default;
+    /*
+     * C'tor of the Wizard:
+     *
+     * @param playerName  - The name of the player.
+     * @return
+     *      An instance of Wizard
+     */
+    explicit Wizard(std::string playerName);
+
+    /*
+     * Default D'tor, copy C'tor, assignment operator overload
+     */
+    ~Wizard() override = default;
     Wizard(const Wizard&) = default;
     Wizard& operator=(const Wizard&) = default;
+
+    /*
+     * Increase the player's HP by given number of points with the limit of maxHP
+     * @param hpAmount the number of points to be added
+     *
+     * @return
+     *      void
+     */
     void heal(int hpAmount) override;
-
-
-private:
 };
 #endif //EX4_WIZARD_H
