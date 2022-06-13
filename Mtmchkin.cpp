@@ -3,11 +3,12 @@
 #include <fstream>
 #include "utilities.h"
 
-using namespace std;
+using std::string;
+using std::unique_ptr;
+using std::ifstream;
+using std::cin;
 
-static const std::string gameClasses[] = {"Fighter", "Rogue", "Wizard"}; //TODO: Move
-
-Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0)
+Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0)
 {
     getCardDeck(fileName);
     getPlayers();
@@ -33,6 +34,36 @@ static void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& fact
     factoryMap["Wizard"] = new PlayerFactory<Wizard>();
 }
 
+static bool checkName(const string& name) {
+    if (name.length() > 15) {
+        return true;
+    }
+    return false;
+}
+
+static bool checkClass(const string& playerClass) {
+    std::string gameClasses[] = {"Fighter", "Rogue", "Wizard"};
+    for (const string& gameClass : gameClasses) {
+        if (playerClass == gameClass) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static void cardCheck(const string& card, int line)
+{
+    if (card.length() > 15) {
+        throw(DeckFileFormatError(line));
+    }
+
+    for (char i : card) {
+        if (!((i <= 'z' && i >= 'a') || (i <= 'Z' && i >= 'A'))) {
+            throw (DeckFileFormatError(line));
+        }
+    }
+}
+
 void Mtmchkin::getPlayers()
 {
     playerFactoryMapper(playersMap);
@@ -53,7 +84,6 @@ void Mtmchkin::getPlayers()
     do {
         printInsertPlayerMessage();
         while (true) {
-            //cin.ignore(); //TODO: ignore \n from manual input?
             getline(cin, inputName, ' ');
             getline(cin, inputClass);
             if (checkName(inputName) || checkClass(inputClass)) {
@@ -64,19 +94,6 @@ void Mtmchkin::getPlayers()
             }
         }
     } while(--counter > 0);
-}
-
-static void cardCheck(const string& card, int line)
-{
-    if (card.length() > 15) {
-        throw(DeckFileFormatError(line));
-    }
-
-    for (char i : card) {
-        if (!((i <= 'z' && i >= 'a') || (i <= 'Z' && i >= 'A'))) {
-            throw (DeckFileFormatError(line));
-        }
-    }
 }
 
 void Mtmchkin::getCardDeck(const string& fileName)
@@ -90,27 +107,11 @@ void Mtmchkin::getCardDeck(const string& fileName)
     int cardCount = 1;
     for (; getline(source, card); ++cardCount) {
         cardCheck(card, cardCount);
-        m_cardDeck.push_back(cardsMap[card]->createInstance());
+        m_cardDeck.push_back(move(cardsMap[card]->createInstance()));
     }
     if (cardCount < 5) {
         throw(DeckFileInvalidSize());
     }
-}
-
-bool Mtmchkin::checkName(string& name) {
-    if (name.length() > 15) {
-        return true;
-    }
-    return false;
-}
-
-bool Mtmchkin::checkClass(string& playerClass) {
-    for (const string& gameClass : gameClasses) {
-        if (playerClass == gameClass) {
-            return false;
-        }
-    }
-    return true;
 }
 
 int Mtmchkin::getNumberOfRounds() const
@@ -140,7 +141,7 @@ void Mtmchkin::printLeaderBoard() const
 
 bool Mtmchkin::isGameOver() const
 {
-    if (!m_players.size()) {
+    if (m_players.empty()) {
         return true;
     }
     return false;
@@ -149,7 +150,7 @@ bool Mtmchkin::isGameOver() const
 void Mtmchkin::playNextCard(Player& somePlayer)
 {
     m_cardDeck.front()->applyEncounter(somePlayer);
-    m_cardDeck.push_back(m_cardDeck.front());
+    m_cardDeck.push_back(move(m_cardDeck.front()));
     m_cardDeck.pop_front();
 }
 

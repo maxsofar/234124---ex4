@@ -55,7 +55,7 @@ public:
     int getNumberOfRounds() const;
 
 private:
-    std::deque<Card*> m_cardDeck;
+    std::deque<std::unique_ptr<Card>> m_cardDeck;
     std::deque<std::unique_ptr<Player>> m_players;
     std::unordered_map<std::string, cFactory*> cardsMap;
     std::unordered_map<std::string, pFactory*> playersMap;
@@ -68,8 +68,6 @@ private:
     void getCardDeck(const std::string& fileName);
     void getPlayers();
     void playNextCard(Player& somePlayer);
-    bool checkName(std::string& name);
-    bool checkClass(std::string& playerClass);
 };
 
 

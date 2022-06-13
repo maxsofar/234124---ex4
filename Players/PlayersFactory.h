@@ -24,16 +24,7 @@ template <class PlayerType>
 std::unique_ptr<Player> PlayerFactory<PlayerType>::createInstance(std::string playerName)
 {
     std::unique_ptr<Player> ptr = std::unique_ptr<Player>(new PlayerType(playerName));
-    //return std::unique_ptr<Player>(new PlayerType(playerName));
     return ptr;
 }
 
-/*
-void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)
-{
-    factoryMap["Fighter"] = new PlayerFactory<Fighter>();
-    factoryMap["Rogue"] = new PlayerFactory<Rogue>();
-    factoryMap["Wizard"] = new PlayerFactory<Wizard>();
-}
-*/
 #endif //EX4_PLAYERSFACTORY_H
