@@ -2,11 +2,11 @@
 #define MTMCHKIN_H_
 
 #include <string>
-#include "Card.h"
+#include "Cards/Card.h"
 #include <vector>
 #include <deque>
-#include "CardFactory.h"
-#include "PlayersFactory.h"
+#include "Cards/CardFactory.h"
+#include "Players/PlayersFactory.h"
 
 class Mtmchkin{
 

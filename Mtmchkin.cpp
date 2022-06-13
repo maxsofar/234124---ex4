@@ -14,6 +14,25 @@ Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0)
 
 }
 
+static void cardFactoryMapper(std::unordered_map<std::string, cFactory*>& factoryMap)
+{
+    factoryMap["Barfight"] = new CardFactory<Barfight>();
+    factoryMap["Vampire"] = new CardFactory<Vampire>();
+    factoryMap["Dragon"] = new CardFactory<Dragon>();
+    factoryMap["Fairy"] = new CardFactory<Fairy>();
+    factoryMap["Pitfall"] = new CardFactory<Pitfall>();
+    factoryMap["Goblin"] = new CardFactory<Goblin>();
+    factoryMap["Merchant"] = new CardFactory<Merchant>();
+    factoryMap["Treasure"] = new CardFactory<Treasure>();
+}
+
+static void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)
+{
+    factoryMap["Fighter"] = new PlayerFactory<Fighter>();
+    factoryMap["Rogue"] = new PlayerFactory<Rogue>();
+    factoryMap["Wizard"] = new PlayerFactory<Wizard>();
+}
+
 void Mtmchkin::getPlayers()
 {
     playerFactoryMapper(playersMap);
@@ -150,8 +169,10 @@ void Mtmchkin::playRound()
             m_players.pop_front();
             --m_numOfPlayers;
         }
-        m_players.push_back(move(m_players.front()));
-        m_players.pop_front();
+        if (m_numOfPlayers > 1) {
+            m_players.push_back(move(m_players.front()));
+            m_players.pop_front();
+        }
     }
     if(isGameOver()) {
         printGameEndMessage();

@@ -2,8 +2,8 @@
 #define EX4_CARD_H
 
 #include <string>
-#include "Players/Player.h"
-#include "utilities.h"
+#include "../Players/Player.h"
+#include "../utilities.h"
 
 struct CardStats{
     int force;  // The force of the monster

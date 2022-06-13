@@ -28,10 +28,12 @@ std::unique_ptr<Player> PlayerFactory<PlayerType>::createInstance(std::string pl
     return ptr;
 }
 
-static void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)
+/*
+void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)
 {
     factoryMap["Fighter"] = new PlayerFactory<Fighter>();
     factoryMap["Rogue"] = new PlayerFactory<Rogue>();
     factoryMap["Wizard"] = new PlayerFactory<Wizard>();
 }
+*/
 #endif //EX4_PLAYERSFACTORY_H

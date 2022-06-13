@@ -1,5 +1,4 @@
 #include "Vampire.h"
-#include "utilities.h"
 
 static CardStats getStats()
 {

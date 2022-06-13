@@ -1,5 +1,4 @@
 #include "Goblin.h"
-#include "utilities.h"
 
 static CardStats getStats()
 {

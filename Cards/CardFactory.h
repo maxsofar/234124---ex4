@@ -21,7 +21,7 @@ public:
 template <class CardType>
 class CardFactory : public cFactory {
 public:
-    Card* createInstance();
+    Card* createInstance() override;
 };
 
 template <class CardType>
@@ -30,7 +30,8 @@ Card* CardFactory<CardType>::createInstance()
     return new CardType();
 }
 
-static void cardFactoryMapper(std::unordered_map<std::string, cFactory*>& factoryMap)
+/*
+void cardFactoryMapper(std::unordered_map<std::string, cFactory*>& factoryMap)
 {
     factoryMap["Barfight"] = new CardFactory<Barfight>();
     factoryMap["Vampire"] = new CardFactory<Vampire>();
@@ -40,5 +41,5 @@ static void cardFactoryMapper(std::unordered_map<std::string, cFactory*>& factor
     factoryMap["Goblin"] = new CardFactory<Goblin>();
     factoryMap["Merchant"] = new CardFactory<Merchant>();
     factoryMap["Treasure"] = new CardFactory<Treasure>();
-}
+}*/
 #endif //EX4_OBJECTFACTORY_H

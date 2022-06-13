@@ -1,6 +1,6 @@
 #include "Player.h"
 #include <utility>
-#include "utilities.h"
+#include "../utilities.h"
 
 Player::Player(const std::string& playerName, Character someCharacter)
         : m_name(playerName), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
@@ -17,6 +17,8 @@ std::string Player::getCharacter() const
             return "Rogue";
         case Character::Fighter:
             return "Fighter";
+        default:
+            return " ";
     }
 }
 
