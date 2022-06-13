@@ -1,14 +1,18 @@
 #include "Dragon.h"
 
-static const CardStats dragonStats(25, 1000, 0, 0, 1000); //TODO: dragon hpLoss amount?
+static CardStats getStats()
+{
+    static const CardStats dragonStats(25, 999999, 0, 0, 1000);
+    return  dragonStats;
+}
 
-Dragon::Dragon() : Card(CardType::Battle, dragonStats, "Dragon")
+Dragon::Dragon() : Card(getStats(), "Dragon")
 {}
 
 std::ostream& operator<<(std::ostream& os, const Dragon&)
 {
     printCardDetails(os, "Dragon");
-    printMonsterDetails(os, dragonStats.force, dragonStats.hpLossOnDefeat, dragonStats.loot);
+    printMonsterDetails(os, getStats().force, getStats().hpLossOnDefeat, getStats().loot, true);
     printEndOfCardDetails(os);
     return os;
 }

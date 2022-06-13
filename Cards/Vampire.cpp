@@ -1,22 +1,26 @@
 #include "Vampire.h"
 #include "utilities.h"
 
-static const CardStats vampireStats(10, 10, 0, 0, 2);
+static CardStats getStats()
+{
+    CardStats vampireStats(10, 10, 0, 0, 2);
+    return  vampireStats;
+}
 
-Vampire::Vampire() : Card(CardType::Battle, vampireStats, "Vampire")
+Vampire::Vampire() : Card(getStats(), "Vampire")
 {}
 
 std::ostream& operator<<(std::ostream& os, const Vampire&)
 {
     printCardDetails(os, "Vampire");
-    printMonsterDetails(os, vampireStats.force, vampireStats.hpLossOnDefeat, vampireStats.loot);
+    printMonsterDetails(os, getStats().force, getStats().hpLossOnDefeat, getStats().loot);
     printEndOfCardDetails(os);
     return os;
 }
 
 void Vampire::applyEncounter(Player &player)
 {
-    if (player.getAttackStrength() >= m_stats.force) { //TODO: Battle cards code duplication
+    if (player.getAttackStrength() >= m_stats.force) {
         player.levelUp();
         player.addCoins(m_stats.loot);
         printWinBattle(player.getName(), "Vampire");

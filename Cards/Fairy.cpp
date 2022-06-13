@@ -1,14 +1,17 @@
 #include "Fairy.h"
 
+static CardStats getStats()
+{
+    CardStats fairyStats(0, 0, 0, 10, 0);
+    return  fairyStats;
+}
 
-static const CardStats fairyStats(0, 0, 0, 10, 0);
-
-Fairy::Fairy() : Card(CardType::Fairy, fairyStats, "Fairy")
+Fairy::Fairy() : Card(getStats(), "Fairy")
 {}
 
 void Fairy::applyEncounter(Player &player)
 {
-    if (player.whatCharacter() == "Wizard") {
+    if (player.getCharacter() == "Wizard") {
         player.heal(m_stats.heal);
         printFairyMessage(true);
     } else {

@@ -1,8 +1,12 @@
 #include "Treasure.h"
 
-static const CardStats treasureStats(0, 0, 0, 0, 10);
+static CardStats getStats()
+{
+    CardStats treasureStats(0, 0, 0, 0, 10);
+    return  treasureStats;
+}
 
-Treasure::Treasure() : Card(CardType::Treasure, treasureStats, "Treasure")
+Treasure::Treasure() : Card(getStats(), "Treasure")
 {}
 
 void Treasure::applyEncounter(Player &player)

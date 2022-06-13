@@ -1,8 +1,12 @@
 #include "Barfight.h"
 
-static const CardStats barfightStats(0, 10, 0, 10, 0);
+static CardStats getStats()
+{
+    CardStats barfightStats(0, 10, 0, 10, 0);
+    return  barfightStats;
+}
 
-Barfight::Barfight() : Card(CardType::Barfight, barfightStats, "Barfight")
+Barfight::Barfight() : Card(getStats(), "Barfight")
 {}
 
 void Barfight::applyEncounter(Player &player)

@@ -13,7 +13,7 @@ public:
      * @return
      *      An instance of Fighter
      */
-    explicit Fighter(std::string playerName);
+    explicit Fighter(const std::string& playerName);
 
     /*
      * Default D'tor, copy C'tor, assignment operator overload

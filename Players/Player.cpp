@@ -2,8 +2,8 @@
 #include <utility>
 #include "utilities.h"
 
-Player::Player(std::string playerName, Character someCharacter)
-        : m_name(std::move(playerName)), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
+Player::Player(const std::string& playerName, Character someCharacter)
+        : m_name(playerName), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
         m_coins(INITIAL_COINS_AMOUNT), m_character(someCharacter)
 {}
 

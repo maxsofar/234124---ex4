@@ -129,7 +129,7 @@ protected:
      * @return
      *      An instance of Player
      */
-    Player(std::string playerName, Character someCharacter);
+    Player(const std::string& playerName, Character someCharacter);
 
     /*
      * Default D'tor, copy C'tor, assignment operator overload

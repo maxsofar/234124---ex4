@@ -12,7 +12,7 @@ public:
      * @return
      *      An instance of Rogue
      */
-    explicit Rogue(std::string playerName);
+    explicit Rogue(const std::string& playerName);
 
     /*
      * Default D'tor, copy C'tor, assignment operator overload

@@ -12,7 +12,7 @@ public:
      * @return
      *      An instance of Wizard
      */
-    explicit Wizard(std::string playerName);
+    explicit Wizard(const std::string& playerName);
 
     /*
      * Default D'tor, copy C'tor, assignment operator overload
