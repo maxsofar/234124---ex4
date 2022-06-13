@@ -56,11 +56,11 @@ public:
 
 private:
     std::deque<Card*> m_cardDeck;
-    std::deque<Player*> m_players;
+    std::deque<std::unique_ptr<Player>> m_players;
     std::unordered_map<std::string, cFactory*> cardsMap;
     std::unordered_map<std::string, pFactory*> playersMap;
-    std::deque<Player*> m_winners;
-    std::deque<Player*> m_losers;
+    std::deque<std::unique_ptr<Player>> m_winners;
+    std::deque<std::unique_ptr<Player>> m_losers;
 
     int m_roundCounter;
     int m_numOfPlayers;

@@ -11,19 +11,21 @@
 
 class pFactory {
 public:
-    virtual Player* createInstance(std::string playerName) = 0;
+    virtual std::unique_ptr<Player> createInstance(std::string playerName) = 0;
 };
 
 template <class PlayerType>
 class PlayerFactory : public pFactory {
 public:
-    Player* createInstance(std::string playerName) override;
+    std::unique_ptr<Player> createInstance(std::string playerName) override;
 };
 
 template <class PlayerType>
-Player* PlayerFactory<PlayerType>::createInstance(std::string playerName)
+std::unique_ptr<Player> PlayerFactory<PlayerType>::createInstance(std::string playerName)
 {
-    return new PlayerType(playerName);
+    std::unique_ptr<Player> ptr = std::unique_ptr<Player>(new PlayerType(playerName));
+    //return std::unique_ptr<Player>(new PlayerType(playerName));
+    return ptr;
 }
 
 static void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)

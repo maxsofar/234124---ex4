@@ -40,7 +40,7 @@ void Mtmchkin::getPlayers()
             if (checkName(inputName) || checkClass(inputClass)) {
                 printInvalidClass();
             } else {
-                m_players.push_back(playersMap[inputClass]->createInstance(inputName));
+                m_players.push_back(move(playersMap[inputClass]->createInstance(inputName)));
                 break;
             }
         }
@@ -103,17 +103,17 @@ void Mtmchkin::printLeaderBoard() const
 {
     printLeaderBoardStartMessage();
     int ranking = 1;
-    for (const Player* player : m_winners) {
+    for (const unique_ptr<Player>& player : m_winners) {
         printPlayerLeaderBoard(ranking, *player);
         ++ranking;
     }
 
-    for (const Player* player : m_players) {
+    for (const unique_ptr<Player>& player : m_players) {
         printPlayerLeaderBoard(ranking, *player);
         ++ranking;
     }
 
-    for (const Player* player : m_losers) {
+    for (const unique_ptr<Player>& player : m_losers) {
         printPlayerLeaderBoard(ranking, *player);
         ++ranking;
     }
@@ -132,7 +132,6 @@ void Mtmchkin::playNextCard(Player& somePlayer)
     m_cardDeck.front()->applyEncounter(somePlayer);
     m_cardDeck.push_back(m_cardDeck.front());
     m_cardDeck.pop_front();
-    //rotate(m_cardDeck.begin(),m_cardDeck.begin() + 1, m_cardDeck.end());
 }
 
 void Mtmchkin::playRound()
@@ -143,15 +142,15 @@ void Mtmchkin::playRound()
         printTurnStartMessage(m_players.front()->getName());
         playNextCard(*m_players.front());
         if (m_players.front()->isKnockedOut()) {
-            m_losers.push_front(m_players.front());
+            m_losers.push_front(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
         } else if (m_players.front()->getLevel() == 10) {
-            m_winners.push_back(m_players.front());
+            m_winners.push_back(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
         }
-        m_players.push_back(m_players.front());
+        m_players.push_back(move(m_players.front()));
         m_players.pop_front();
     }
     if(isGameOver()) {

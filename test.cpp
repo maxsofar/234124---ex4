@@ -327,11 +327,11 @@ bool badFormatStartTest()
 
 int main(){
 
-    run_test(cardsPrintsTest,"cardsPrintsTest");
-    run_test(testCard,"Deck creation test");
+    //run_test(cardsPrintsTest,"cardsPrintsTest");
+    //run_test(testCard,"Deck creation test");
     run_test(dragonDenTest,"Dragon Den simulation test");
+    /*
     run_test(goblinCaveTest,"Goblin Cave simulation test");
-
     run_test(vampireLairTest,"Vampire Lair simulation test");
     run_test(nonMostersTest,"Non monsters cards simulation test");
     run_test(badFormatStartTest,"Bad format at start of file exception test");
@@ -342,6 +342,7 @@ int main(){
     run_test(allTenTest,"All reach lvl 10 test");
     run_test(badPlayerInputTest,"Bad player input test");
     run_test(merchantInputTest,"Merchant input test");
+    */
 
     return 0;
 }

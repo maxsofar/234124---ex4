@@ -120,6 +120,8 @@ public:
      */
     virtual int getAttackStrength();
 
+    virtual ~Player() = default;
+
 protected:
     /*
      * C'tor of the player:
@@ -134,7 +136,7 @@ protected:
     /*
      * Default D'tor, copy C'tor, assignment operator overload
      */
-    virtual ~Player() = default;
+    //virtual ~Player() = default;
 
     Player(const Player &) = default;
 
