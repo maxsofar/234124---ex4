@@ -3,6 +3,7 @@
 #include <fstream>
 #include "utilities.h"
 
+
 using std::string;
 using std::unique_ptr;
 using std::ifstream;
@@ -12,26 +13,6 @@ Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0)
 {
     getCardDeck(fileName);
     getPlayers();
-
-}
-
-static void cardFactoryMapper(std::unordered_map<std::string, cFactory*>& factoryMap)
-{
-    factoryMap["Barfight"] = new CardFactory<Barfight>();
-    factoryMap["Vampire"] = new CardFactory<Vampire>();
-    factoryMap["Dragon"] = new CardFactory<Dragon>();
-    factoryMap["Fairy"] = new CardFactory<Fairy>();
-    factoryMap["Pitfall"] = new CardFactory<Pitfall>();
-    factoryMap["Goblin"] = new CardFactory<Goblin>();
-    factoryMap["Merchant"] = new CardFactory<Merchant>();
-    factoryMap["Treasure"] = new CardFactory<Treasure>();
-}
-
-static void playerFactoryMapper(std::unordered_map<std::string, pFactory*>& factoryMap)
-{
-    factoryMap["Fighter"] = new PlayerFactory<Fighter>();
-    factoryMap["Rogue"] = new PlayerFactory<Rogue>();
-    factoryMap["Wizard"] = new PlayerFactory<Wizard>();
 }
 
 static bool checkName(const string& name) {
@@ -66,7 +47,6 @@ static void cardCheck(const string& card, int line)
 
 void Mtmchkin::getPlayers()
 {
-    playerFactoryMapper(playersMap);
     printStartGameMessage();
     printEnterTeamSizeMessage();
     while(true) {
@@ -89,7 +69,7 @@ void Mtmchkin::getPlayers()
             if (checkName(inputName) || checkClass(inputClass)) {
                 printInvalidClass();
             } else {
-                m_players.push_back(move(playersMap[inputClass]->createInstance(inputName)));
+                m_players.push_back(move(m_playersMap[inputClass]->createInstance(inputName)));
                 break;
             }
         }
@@ -102,12 +82,11 @@ void Mtmchkin::getCardDeck(const string& fileName)
     if (!source) {
         throw(DeckFileNotFound());
     }
-    cardFactoryMapper(cardsMap);
     string card;
     int cardCount = 1;
     for (; getline(source, card); ++cardCount) {
         cardCheck(card, cardCount);
-        m_cardDeck.push_back(move(cardsMap[card]->createInstance()));
+        m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
     }
     if (cardCount < 5) {
         throw(DeckFileInvalidSize());

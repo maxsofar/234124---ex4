@@ -120,6 +120,9 @@ public:
      */
     virtual int getAttackStrength();
 
+    /*
+     * Default D'tor
+     */
     virtual ~Player() = default;
 
 protected:
@@ -134,9 +137,8 @@ protected:
     Player(const std::string& playerName, Character someCharacter);
 
     /*
-     * Default D'tor, copy C'tor, assignment operator overload
+     * copy C'tor, assignment operator overload
      */
-    //virtual ~Player() = default;
 
     Player(const Player &) = default;
 

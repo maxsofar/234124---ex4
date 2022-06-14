@@ -19,7 +19,6 @@ struct CardStats{
      * @param hpLoss - HP loss when losing the battle.
      * @param cost - The cost of the card when is type is "Buff" or "Heal".
      * @param heal - The amount of HP is given when buying a "Heal" card.
-     * @param buff - The amount of force is given when buying a "Buff" card.
      * @param loot - The profit from winning a battle or when getting a "Treasure" card.
      * @return
      *      New instance of CardStats.
@@ -44,6 +43,10 @@ public:
      *      void
     */
     virtual void applyEncounter(Player& player) = 0;
+
+    /*
+     * Default D'tor
+     */
     virtual ~Card() = default;
 
 protected:
@@ -61,7 +64,6 @@ protected:
      * Here we are explicitly telling the compiler to use the default methods
     */
     Card(const Card&) = default;
-    //virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
 
     CardStats m_stats;

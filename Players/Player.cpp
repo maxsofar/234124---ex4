@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <utility>
 #include "../utilities.h"
 
 Player::Player(const std::string& playerName, Character someCharacter)
