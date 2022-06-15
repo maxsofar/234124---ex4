@@ -127,14 +127,6 @@ public:
     */
     bool operator <=(const HealthPoints& rightSide) const;
 
-    /*
-     * InvalidArgument class declaration/empty implementation
-     *
-     * It is used be thrown as exception in case zero or negative number received in
-     * HealthPoints C'tor
-    */
-    class InvalidArgument {};
-
 private:
     static const int DEFAULT_HP = 100;
     int m_HP, m_maxHP;

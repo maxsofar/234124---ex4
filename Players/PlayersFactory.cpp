@@ -10,7 +10,7 @@ PlayersMap::PlayersMap()
     playersMap["Wizard"] = unique_ptr<PlayerFactory<Wizard>>(new PlayerFactory<Wizard>());
 }
 
-unique_ptr<Factory>& PlayersMap::operator[](const std::string &cardName)
+unique_ptr<Factory>& PlayersMap::operator[](const std::string &playerClass)
 {
-    return playersMap[cardName];
+    return playersMap[playerClass];
 }

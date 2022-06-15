@@ -4,9 +4,9 @@
 #include <exception>
 #include <string>
 
-class Exception : public std::logic_error {
+class Exception : public std::runtime_error {
 public:
-    explicit Exception(const std::string& what) : std::logic_error(what)
+    explicit Exception(const std::string& what) : std::runtime_error(what)
     {}
 };
 

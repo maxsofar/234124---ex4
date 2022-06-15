@@ -17,23 +17,29 @@ Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0)
 
 static bool checkName(const string& name) {
     if (name.length() > 15) {
-        return true;
+        return false;
     }
-    return false;
-}
-
-static bool checkClass(const string& playerClass) {
-    std::string gameClasses[] = {"Fighter", "Rogue", "Wizard"};
-    for (const string& gameClass : gameClasses) {
-        if (playerClass == gameClass) {
+    for (char i : name) {
+        if (!((i <= 'z' && i >= 'a') || (i <= 'Z' && i >= 'A'))) {
             return false;
         }
     }
     return true;
 }
 
+static bool checkClass(const string& playerClass) {
+    std::string gameClasses[] = {"Fighter", "Rogue", "Wizard"};
+    for (const string& gameClass : gameClasses) {
+        if (playerClass == gameClass) {
+            return true;
+        }
+    }
+    return false;
+}
+
 static void cardCheck(const string& card, int line)
 {
+    //TODO: Change check to compare to actual cards names???
     if (card.length() > 15) {
         throw(DeckFileFormatError(line));
     }
@@ -66,7 +72,9 @@ void Mtmchkin::getPlayers()
         while (true) {
             getline(cin, inputName, ' ');
             getline(cin, inputClass);
-            if (checkName(inputName) || checkClass(inputClass)) {
+            if (!checkName(inputName)) {
+                printInvalidName();
+            } else if (!checkClass(inputClass)) {
                 printInvalidClass();
             } else {
                 m_players.push_back(move(m_playersMap[inputClass]->createInstance(inputName)));
