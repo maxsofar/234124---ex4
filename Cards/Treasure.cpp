@@ -2,7 +2,7 @@
 
 static CardStats getStats()
 {
-    CardStats treasureStats(0, 0, 0, 0, 10);
+    CardStats treasureStats(0, 0, 0, 10);
     return  treasureStats;
 }
 
@@ -11,6 +11,6 @@ Treasure::Treasure() : Card(getStats(), "Treasure")
 
 void Treasure::applyEncounter(Player &player)
 {
-    player.addCoins(m_stats.loot);
+    player.addCoins(m_stats.m_loot);
     printTreasureMessage();
 }

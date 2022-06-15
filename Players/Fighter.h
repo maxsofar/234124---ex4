@@ -26,7 +26,7 @@ public:
      * Get the attack strength of the player
      *
      * @return
-     *      the sum of force points and player's level
+     *      the sum of m_force points and player's level
      */
     int getAttackStrength() override;
 };

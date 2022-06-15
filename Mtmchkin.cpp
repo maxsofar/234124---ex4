@@ -1,6 +1,7 @@
 #include "Mtmchkin.h"
 #include "Exception.h"
 #include <fstream>
+#include <vector>
 #include "utilities.h"
 
 
@@ -28,26 +29,22 @@ static bool checkName(const string& name) {
 }
 
 static bool checkClass(const string& playerClass) {
-    std::string gameClasses[] = {"Fighter", "Rogue", "Wizard"};
-    for (const string& gameClass : gameClasses) {
-        if (playerClass == gameClass) {
-            return true;
-        }
+    std::vector<string> gameClasses{"Fighter", "Rogue", "Wizard"};
+
+    if (std::find(gameClasses.begin(), gameClasses.end(), playerClass) != gameClasses.end()) {
+        return true;
     }
+
     return false;
 }
 
 static void cardCheck(const string& card, int line)
 {
-    //TODO: Change check to compare to actual cards names???
-    if (card.length() > 15) {
-        throw(DeckFileFormatError(line));
-    }
+    std::vector<string> cards {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant",
+                                          "Pitfall", "Treasure", "Vampire"};
 
-    for (char i : card) {
-        if (!((i <= 'z' && i >= 'a') || (i <= 'Z' && i >= 'A'))) {
-            throw (DeckFileFormatError(line));
-        }
+    if (std::find(cards.begin(), cards.end(), card) == cards.end()) {
+        throw(DeckFileFormatError(line));
     }
 }
 

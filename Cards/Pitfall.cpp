@@ -2,7 +2,7 @@
 
 static CardStats getStats()
 {
-    CardStats pitfallStats(0, 10, 0, 0, 0);
+    CardStats pitfallStats(0, 10, 0, 0);
     return  pitfallStats;
 }
 
@@ -14,7 +14,7 @@ void Pitfall::applyEncounter(Player &player)
     if (player.getCharacter() == "Rogue") {
         printPitfallMessage(true);
     } else {
-        player.damage(m_stats.hpLossOnDefeat);
+        player.damage(m_stats.m_hpLossOnDefeat);
         printPitfallMessage(false);
     }
 }

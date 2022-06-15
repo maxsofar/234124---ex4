@@ -2,7 +2,7 @@
 
 static CardStats getStats()
 {
-    CardStats merchantStats(0, 0, 0, 0, 10);
+    CardStats merchantStats(0, 0, 0, 10);
     return  merchantStats;
 }
 
