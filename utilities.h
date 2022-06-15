@@ -22,7 +22,7 @@
  * @param name - The name of the player.
  * @param job - The job class of the player.
  * @param level - The player's level.
- * @param force - The player's force.
+ * @param m_force - The player's m_force.
  * @param hp - The player's HP points.
  * @param coins - The player's amount of coins.
  * @return
@@ -76,9 +76,9 @@ void printMerchantInsufficientCoins(std::ostream &os);
  * Prints the details of a monster card:
 
  * @param os - The ostream.
- * @param force - The monster's force.
+ * @param m_force - The monster's m_force.
  * @param damage - The monster's damage.
- * @param coins - The monster's loot.
+ * @param coins - The monster's m_loot.
  * @return
  *      void
  */

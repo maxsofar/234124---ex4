@@ -59,6 +59,7 @@ private:
     std::deque<std::unique_ptr<Player>> m_players;
     std::deque<std::unique_ptr<Player>> m_winners;
     std::deque<std::unique_ptr<Player>> m_losers;
+
     int m_roundCounter;
     int m_numOfPlayers;
     CardFactory::CardsMap m_cardsMap;

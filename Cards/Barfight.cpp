@@ -2,7 +2,7 @@
 
 static CardStats getStats()
 {
-    CardStats barfightStats(0, 10, 0, 10, 0);
+    CardStats barfightStats(0, 10, 0, 0);
     return  barfightStats;
 }
 
@@ -14,7 +14,7 @@ void Barfight::applyEncounter(Player &player)
     if (player.getCharacter() == "Fighter") {
         printBarfightMessage(true);
     } else {
-        player.damage(m_stats.hpLossOnDefeat);
+        player.damage(m_stats.m_hpLossOnDefeat);
         printBarfightMessage(false);
     }
 }
