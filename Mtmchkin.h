@@ -65,8 +65,30 @@ private:
     CardFactory::CardsMap m_cardsMap;
     PlayersFactory::PlayersMap m_playersMap;
 
+    /*
+    *  Parses cards from text file, and stores them
+    *
+    *  @param fileName - Name of the file that contains game cards names.
+    *  @return
+    *          void
+    */
     void getCardDeck(const std::string& fileName);
+
+    /*
+    *   Receives and stores players.
+    *
+    *  @return
+    *          void
+    */
     void getPlayers();
+
+    /*
+    *  Plays next card with given player, and shuffles the card deck
+    *
+    *  @param somePlayer -Player that about to play the current card.
+    *  @return
+    *          void
+    */
     void playNextCard(Player& somePlayer);
 };
 
