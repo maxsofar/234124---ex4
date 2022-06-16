@@ -2,6 +2,7 @@
 #include "Exception.h"
 #include <fstream>
 #include <vector>
+#include <algorithm>
 #include "utilities.h"
 
 
@@ -20,12 +21,15 @@ static bool checkName(const string& name) {
     if (name.length() > 15) {
         return false;
     }
-    for (char i : name) {
-        if (!((i <= 'z' && i >= 'a') || (i <= 'Z' && i >= 'A'))) {
-            return false;
-        }
+    if (std::all_of(name.begin(), name.end(), [](char c)
+    {
+        return (c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A');
+    }))
+    {
+        return true;
+    } else {
+        return false;
     }
-    return true;
 }
 
 static bool checkClass(const string& playerClass) {
@@ -38,7 +42,7 @@ static bool checkClass(const string& playerClass) {
     return false;
 }
 
-static void cardCheck(const string& card, int line)
+static void checkCard(const string& card, int line)
 {
     std::vector<string> cards {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant",
                                           "Pitfall", "Treasure", "Vampire"};
@@ -90,7 +94,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
     string card;
     int cardCount = 1;
     for (; getline(source, card); ++cardCount) {
-        cardCheck(card, cardCount);
+        checkCard(card, cardCount);
         m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
     }
     if (cardCount < 5) {
