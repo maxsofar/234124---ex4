@@ -157,6 +157,14 @@ private:
     static const int MAX_LEVEL = 10;
     static const int INITIAL_COINS_AMOUNT = 10;
 
+    /*
+     * << operator overloading
+     *
+     * @param ostream - I/O stream the info will be forwarded to.
+     * @param somePlayer - Player instance that called the operator.
+     * @return
+     *      I\O stream
+    */
     friend std::ostream& operator<<(std::ostream& os, const Player& somePlayer);
 };
 #endif //EX4_PLAYER_H
