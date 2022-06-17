@@ -11,7 +11,9 @@ using std::unique_ptr;
 using std::ifstream;
 using std::cin;
 
-Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0)
+Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0),
+m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire"},
+m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
     getCardDeck(fileName);
     getPlayers();
@@ -32,9 +34,7 @@ static bool checkName(const string& name) {
     }
 }
 
-static bool checkClass(const string& playerClass) {
-    std::vector<string> gameClasses{"Fighter", "Rogue", "Wizard"};
-
+static bool checkClass(const std::vector<string>& gameClasses, const string& playerClass) {
     if (std::find(gameClasses.begin(), gameClasses.end(), playerClass) != gameClasses.end()) {
         return true;
     }
@@ -42,12 +42,9 @@ static bool checkClass(const string& playerClass) {
     return false;
 }
 
-static void checkCard(const string& card, int line)
+static void checkCard(const std::vector<string>& cardTypes, const string& card, int line)
 {
-    std::vector<string> cards {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant",
-                               "Pitfall", "Treasure", "Vampire"};
-
-    if (std::find(cards.begin(), cards.end(), card) == cards.end()) {
+    if (std::find(cardTypes.begin(), cardTypes.end(), card) == cardTypes.end()) {
         throw(DeckFileFormatError(line));
     }
 }
@@ -56,12 +53,15 @@ void Mtmchkin::getPlayers()
 {
     printStartGameMessage();
     printEnterTeamSizeMessage();
+
+    string input;
     while(true) {
-        cin >> m_numOfPlayers;
-        if (m_numOfPlayers < 2 || m_numOfPlayers > 6) {
+        getline(cin, input);
+        if (cin.fail() || cin.eof() || input.find_first_not_of("23456") != string::npos) {
             printInvalidTeamSize();
         } else {
-            cin.ignore();
+            string::size_type size;
+            m_numOfPlayers = std::stoi(input, &size);
             break;
         }
     }
@@ -75,7 +75,7 @@ void Mtmchkin::getPlayers()
             getline(cin, inputClass);
             if (!checkName(inputName)) {
                 printInvalidName();
-            } else if (!checkClass(inputClass)) {
+            } else if (!checkClass(m_gameClasses, inputClass)) {
                 printInvalidClass();
             } else {
                 m_players.push_back(move(m_playersMap[inputClass]->createInstance(inputName)));
@@ -94,7 +94,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
     string card;
     int cardCount = 1;
     for (; getline(source, card); ++cardCount) {
-        checkCard(card, cardCount);
+        checkCard(m_cardTypes, card, cardCount);
         m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
     }
     if (cardCount < 5) {

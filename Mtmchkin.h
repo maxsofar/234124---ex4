@@ -62,6 +62,9 @@ private:
 
     int m_roundCounter;
     int m_numOfPlayers;
+    const std::vector<std::string> m_cardTypes;
+    const std::vector<std::string> m_gameClasses;
+
     CardFactory::CardsMap m_cardsMap;
     PlayersFactory::PlayersMap m_playersMap;
 
