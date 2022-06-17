@@ -60,8 +60,7 @@ void Mtmchkin::getPlayers()
         if (cin.fail() || cin.eof() || input.find_first_not_of("23456") != string::npos) {
             printInvalidTeamSize();
         } else {
-            string::size_type size;
-            m_numOfPlayers = std::stoi(input, &size);
+            m_numOfPlayers = std::stoi(input);
             break;
         }
     }
