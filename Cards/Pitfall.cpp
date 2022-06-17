@@ -1,12 +1,6 @@
 #include "Pitfall.h"
 
-static CardStats getStats()
-{
-    CardStats pitfallStats(0, 10, 0, 0);
-    return  pitfallStats;
-}
-
-Pitfall::Pitfall() : Card(getStats(), "Pitfall")
+Pitfall::Pitfall() : Card(CardStats (0, 10, 0, 0), "Pitfall")
 {}
 
 void Pitfall::applyEncounter(Player &player)
@@ -14,7 +8,7 @@ void Pitfall::applyEncounter(Player &player)
     if (player.getCharacter() == "Rogue") {
         printPitfallMessage(true);
     } else {
-        player.damage(m_stats.m_hpLossOnDefeat);
+        player.damage(m_stats.hpLossOnDefeat);
         printPitfallMessage(false);
     }
 }

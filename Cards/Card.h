@@ -6,27 +6,27 @@
 #include "../utilities.h"
 
 struct CardStats{
-    int m_force;  // The m_force of the monster
-    int m_loot; // The profit you get when winning a battle or when getting a "Treasure" card
-    int m_hpLossOnDefeat; // The amount of hp you lose when losing the battle
-    int m_heal; // The amount of HP you get when buying a "HEAL" card
+    int force;  // The force of the monster
+    int loot; // The profit you get when winning a battle or when getting a "Treasure" card
+    int hpLossOnDefeat; // The amount of hp you lose when losing the battle
+    int heal; // The amount of HP you get when buying a "HEAL" card
 
     /*
      *C'tor of CardStats:
      *
-     * @param m_force - The m_force of the card (monster).
+     * @param force - The force of the card (monster).
      * @param hpLoss - HP loss when losing the battle.
-     * @param m_heal - The amount of HP is given when buying a "Heal" card.
-     * @param m_loot - The profit from winning a battle or when getting a "Treasure" card.
+     * @param heal - The amount of HP is given when buying a "Heal" card.
+     * @param loot - The profit from winning a battle or when getting a "Treasure" card.
      * @return
      *      New instance of CardStats.
     */
     explicit CardStats(int force = 0, int hpLoss = 0, int heal = 0, int loot = 0)
     {
-        this->m_force = force;
-        this->m_hpLossOnDefeat = hpLoss;
-        this->m_heal = heal;
-        this->m_loot = loot;
+        this->force = force;
+        this->hpLossOnDefeat = hpLoss;
+        this->heal = heal;
+        this->loot = loot;
     }
 };
 

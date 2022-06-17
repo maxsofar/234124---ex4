@@ -42,7 +42,7 @@ public:
     void levelUp();
 
     /*
-     * Decreases player's m_force one point
+     * Decreases player's force one point
      *
      * @return
      *      void
@@ -50,7 +50,7 @@ public:
     void loseForce();
 
     /*
-     * Increase the player's m_force by given number of points
+     * Increase the player's force by given number of points
      * @param buffVal the number of points to be added
      *
      * @return
@@ -116,7 +116,7 @@ public:
      * Get the attack strength of the player
      *
      * @return
-     *      the sum of m_force points and player's level
+     *      the sum of force points and player's level
      */
     virtual int getAttackStrength();
 

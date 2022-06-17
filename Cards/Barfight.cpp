@@ -1,12 +1,6 @@
 #include "Barfight.h"
 
-static CardStats getStats()
-{
-    CardStats barfightStats(0, 10, 0, 0);
-    return  barfightStats;
-}
-
-Barfight::Barfight() : Card(getStats(), "Barfight")
+Barfight::Barfight() : Card(CardStats (0, 10, 0, 0), "Barfight")
 {}
 
 void Barfight::applyEncounter(Player &player)
@@ -14,7 +8,7 @@ void Barfight::applyEncounter(Player &player)
     if (player.getCharacter() == "Fighter") {
         printBarfightMessage(true);
     } else {
-        player.damage(m_stats.m_hpLossOnDefeat);
+        player.damage(m_stats.hpLossOnDefeat);
         printBarfightMessage(false);
     }
 }

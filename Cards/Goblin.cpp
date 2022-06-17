@@ -1,30 +1,25 @@
 #include "Goblin.h"
 
-static CardStats getStats()
-{
-    CardStats goblinStats(6, 10, 0, 2);
-    return  goblinStats;
-}
-
-Goblin::Goblin() : Card(getStats(), "Goblin")
+Goblin::Goblin() : Card(CardStats(6, 10, 0, 2), "Goblin")
 {}
 
-std::ostream& operator<<(std::ostream& os, const Goblin&)
+std::ostream& operator<<(std::ostream& os, const Goblin& goblin)
 {
     printCardDetails(os, "Goblin");
-    printMonsterDetails(os, getStats().m_force, getStats().m_hpLossOnDefeat, getStats().m_loot);
+    printMonsterDetails(os, goblin.m_stats.force, goblin.m_stats.hpLossOnDefeat,
+                        goblin.m_stats.loot);
     printEndOfCardDetails(os);
     return os;
 }
 
 void Goblin::applyEncounter(Player &player)
 {
-    if (player.getAttackStrength() >= m_stats.m_force) {
+    if (player.getAttackStrength() >= m_stats.force) {
         player.levelUp();
-        player.addCoins(m_stats.m_loot);
+        player.addCoins(m_stats.loot);
         printWinBattle(player.getName(), "Goblin");
     } else {
-        player.damage(m_stats.m_hpLossOnDefeat);
+        player.damage(m_stats.hpLossOnDefeat);
         printLossBattle(player.getName(), "Goblin");
     }
 }
