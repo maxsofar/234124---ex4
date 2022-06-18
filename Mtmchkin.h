@@ -55,6 +55,9 @@ public:
     int getNumberOfRounds() const;
 
 private:
+    static const int MAX_LEVEL = 10;
+    static const int MIN_DECK_SIZE = 5;
+
     std::deque<std::unique_ptr<Card>> m_cardDeck;
     std::deque<std::unique_ptr<Player>> m_players;
     std::deque<std::unique_ptr<Player>> m_winners;

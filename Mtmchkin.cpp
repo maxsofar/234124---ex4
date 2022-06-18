@@ -5,6 +5,8 @@
 #include <algorithm>
 #include "utilities.h"
 
+#define MAX_NAME_LEN 15
+#define TEAM_SIZE_RANGE "23456"
 
 using std::string;
 using std::unique_ptr;
@@ -20,7 +22,7 @@ m_gameClasses{"Fighter", "Rogue", "Wizard"}
 }
 
 static bool checkName(const string& name) {
-    if (name.length() > 15) {
+    if (name.length() > MAX_NAME_LEN) {
         return false;
     }
     if (std::all_of(name.begin(), name.end(), [](char c)
@@ -57,7 +59,7 @@ void Mtmchkin::getPlayers()
     string teamSize;
     while(true) {
         getline(cin, teamSize);
-        if (cin.fail() || cin.eof() || teamSize.find_first_not_of("23456") != string::npos) {
+        if (cin.fail() || cin.eof() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
             printInvalidTeamSize();
         } else {
             m_numOfPlayers = std::stoi(teamSize);
@@ -96,7 +98,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
         checkCard(m_cardTypes, card, cardCount);
         m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
     }
-    if (cardCount < 5) {
+    if (cardCount < MIN_DECK_SIZE) {
         throw(DeckFileInvalidSize());
     }
 }
@@ -152,7 +154,7 @@ void Mtmchkin::playRound()
             m_losers.push_front(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
-        } else if (m_players.front()->getLevel() == 10) {
+        } else if (m_players.front()->getLevel() == MAX_LEVEL) {
             m_winners.push_back(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
