@@ -1,6 +1,6 @@
 #include "Pitfall.h"
 
-Pitfall::Pitfall() : Card(CardStats (0, 10, 0, 0), "Pitfall")
+Pitfall::Pitfall() : Card(CardStats (0, HP_LOSS, 0, 0), "Pitfall")
 {}
 
 void Pitfall::applyEncounter(Player &player)

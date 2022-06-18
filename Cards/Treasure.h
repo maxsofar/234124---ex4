@@ -28,5 +28,8 @@ public:
      *      void
     */
     void applyEncounter(Player& player) override;
+
+private:
+    static const int LOOT = 10;
 };
 #endif //EX4_TREASURE_H

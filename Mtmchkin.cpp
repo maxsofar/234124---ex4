@@ -54,13 +54,13 @@ void Mtmchkin::getPlayers()
     printStartGameMessage();
     printEnterTeamSizeMessage();
 
-    string input;
+    string teamSize;
     while(true) {
-        getline(cin, input);
-        if (cin.fail() || cin.eof() || input.find_first_not_of("23456") != string::npos) {
+        getline(cin, teamSize);
+        if (cin.fail() || cin.eof() || teamSize.find_first_not_of("23456") != string::npos) {
             printInvalidTeamSize();
         } else {
-            m_numOfPlayers = std::stoi(input);
+            m_numOfPlayers = std::stoi(teamSize);
             break;
         }
     }

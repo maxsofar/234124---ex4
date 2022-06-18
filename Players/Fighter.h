@@ -29,5 +29,8 @@ public:
      *      the sum of force points and player's level
      */
     int getAttackStrength() override;
+
+private:
+    static const int FORCE_MULTIPLIER = 2;
 };
 #endif //EX4_FIGHTER_H

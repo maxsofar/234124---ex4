@@ -6,5 +6,5 @@ Fighter::Fighter(const std::string& playerName)
 
 int Fighter::getAttackStrength()
 {
-    return 2*m_force + m_level;
+    return FORCE_MULTIPLIER*m_force + m_level;
 }

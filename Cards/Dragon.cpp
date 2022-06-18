@@ -1,6 +1,6 @@
 #include "Dragon.h"
 
-Dragon::Dragon() : Card(CardStats (25, 999999, 0, 1000), "Dragon")
+Dragon::Dragon() : Card(CardStats (FORCE, HP_LOSS, 0, LOOT), "Dragon")
 {}
 
 std::ostream& operator<<(std::ostream& os, const Dragon& dragon)

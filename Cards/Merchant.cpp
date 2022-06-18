@@ -5,7 +5,7 @@
 using std::cin;
 using std::string;
 
-Merchant::Merchant() : Card(CardStats (0, 0, 0, 10), "Merchant")
+Merchant::Merchant() : Card(CardStats (), "Merchant")
 {}
 
 void Merchant::applyEncounter(Player &player)

@@ -1,6 +1,6 @@
 #include "Treasure.h"
 
-Treasure::Treasure() : Card(CardStats (0, 0, 0, 10), "Treasure")
+Treasure::Treasure() : Card(CardStats (0, 0, 0, LOOT), "Treasure")
 {}
 
 void Treasure::applyEncounter(Player &player)

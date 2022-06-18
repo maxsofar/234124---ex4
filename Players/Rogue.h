@@ -29,6 +29,9 @@ public:
      *      void
      */
     void addCoins(int amount) override;
+
+private:
+    static const int LOOT_MULTIPLIER = 2;
 };
 
 #endif //EX4_ROGUE_H

@@ -30,6 +30,10 @@ public:
     void applyEncounter(Player& player) override;
 
 private:
+    static const int FORCE = 10;
+    static const int HP_LOSS = 10;
+    static const int LOOT = 2;
+
     /*
      * << operator overloading
      *

@@ -28,5 +28,8 @@ public:
      *      void
     */
     void applyEncounter(Player& player) override;
+
+private:
+    static const int HEAL_AMOUNT = 10;
 };
 #endif //EX4_FAIRY_H

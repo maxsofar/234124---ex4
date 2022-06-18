@@ -1,6 +1,6 @@
 #include "Vampire.h"
 
-Vampire::Vampire() : Card(CardStats (10, 10, 0, 2), "Vampire")
+Vampire::Vampire() : Card(CardStats (FORCE, HP_LOSS, 0, LOOT), "Vampire")
 {}
 
 std::ostream& operator<<(std::ostream& os, const Vampire& vampire)

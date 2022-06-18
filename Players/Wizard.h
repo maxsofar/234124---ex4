@@ -29,5 +29,8 @@ public:
      *      void
      */
     void heal(int hpAmount) override;
-};
+
+private:
+    static const int HEAL_MULTIPLIER = 2;
+ };
 #endif //EX4_WIZARD_H

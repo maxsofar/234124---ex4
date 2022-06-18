@@ -28,5 +28,8 @@ public:
      *      void
     */
     void applyEncounter(Player& player) override;
+
+private:
+    static const int HP_LOSS = 10;
 };
 #endif //EX4_PITFALL_H

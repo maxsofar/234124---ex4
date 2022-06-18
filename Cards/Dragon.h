@@ -31,6 +31,10 @@ public:
 
 
 private:
+    static const int FORCE = 25;
+    static const int HP_LOSS = 999999;
+    static const int LOOT = 1000;
+
     /*
      * << operator overloading
      *

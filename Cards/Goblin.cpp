@@ -1,6 +1,6 @@
 #include "Goblin.h"
 
-Goblin::Goblin() : Card(CardStats(6, 10, 0, 2), "Goblin")
+Goblin::Goblin() : Card(CardStats(FORCE, HP_LOSS, 0, LOOT), "Goblin")
 {}
 
 std::ostream& operator<<(std::ostream& os, const Goblin& goblin)
