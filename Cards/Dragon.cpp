@@ -1,16 +1,7 @@
 #include "Dragon.h"
 
-Dragon::Dragon() : Card(CardStats (FORCE, HP_LOSS, 0, LOOT), "Dragon")
+Dragon::Dragon() : BattleCard(CardStats (FORCE, HP_LOSS, 0, LOOT), "Dragon")
 {}
-
-std::ostream& operator<<(std::ostream& os, const Dragon& dragon)
-{
-    printCardDetails(os, "Dragon");
-    printMonsterDetails(os, dragon.m_stats.force, dragon.m_stats.hpLossOnDefeat,
-                        dragon.m_stats.loot, true);
-    printEndOfCardDetails(os);
-    return os;
-}
 
 void Dragon::applyEncounter(Player &player)
 {

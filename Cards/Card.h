@@ -65,8 +65,16 @@ protected:
 
     CardStats m_stats;
 
-private:
     std::string m_name;
+private:
+    /*
+     * Prints card info
+     *
+     * @param ostream - I/O stream the info will be forwarded to.
+     * @return
+     *      I\O stream
+    */
+    virtual void print(std::ostream& os) const;
 
     /*
      * << operator overloading

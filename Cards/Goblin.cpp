@@ -1,16 +1,7 @@
 #include "Goblin.h"
 
-Goblin::Goblin() : Card(CardStats(FORCE, HP_LOSS, 0, LOOT), "Goblin")
+Goblin::Goblin() : BattleCard(CardStats(FORCE, HP_LOSS, 0, LOOT), "Goblin")
 {}
-
-std::ostream& operator<<(std::ostream& os, const Goblin& goblin)
-{
-    printCardDetails(os, "Goblin");
-    printMonsterDetails(os, goblin.m_stats.force, goblin.m_stats.hpLossOnDefeat,
-                        goblin.m_stats.loot);
-    printEndOfCardDetails(os);
-    return os;
-}
 
 void Goblin::applyEncounter(Player &player)
 {

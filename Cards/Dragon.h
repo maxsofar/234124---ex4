@@ -1,9 +1,9 @@
 #ifndef EX4_DRAGON_H
 #define EX4_DRAGON_H
 
-#include "Card.h"
+#include "BattleCard.h"
 
-class Dragon : public Card {
+class Dragon : public BattleCard {
 public:
     /*
      * C'tor of Dragon class
@@ -34,15 +34,5 @@ private:
     static const int FORCE = 25;
     static const int HP_LOSS = 999999;
     static const int LOOT = 1000;
-
-    /*
-     * << operator overloading
-     *
-     * @param ostream - I/O stream the info will be forwarded to.
-     * @param Card - Card instance that called the operator.
-     * @return
-     *      I\O stream
-    */
-    friend std::ostream& operator<<(std::ostream& os, const Dragon&);
 };
 #endif //EX4_DRAGON_H

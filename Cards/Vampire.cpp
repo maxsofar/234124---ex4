@@ -1,16 +1,7 @@
 #include "Vampire.h"
 
-Vampire::Vampire() : Card(CardStats (FORCE, HP_LOSS, 0, LOOT), "Vampire")
+Vampire::Vampire() : BattleCard(CardStats (FORCE, HP_LOSS, 0, LOOT), "Vampire")
 {}
-
-std::ostream& operator<<(std::ostream& os, const Vampire& vampire)
-{
-    printCardDetails(os, "Vampire");
-    printMonsterDetails(os, vampire.m_stats.force, vampire.m_stats.hpLossOnDefeat,
-                        vampire.m_stats.loot);
-    printEndOfCardDetails(os);
-    return os;
-}
 
 void Vampire::applyEncounter(Player &player)
 {

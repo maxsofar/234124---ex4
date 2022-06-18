@@ -1,9 +1,9 @@
 #ifndef EX4_VAMPIRE_H
 #define EX4_VAMPIRE_H
 
-#include "Card.h"
+#include "BattleCard.h"
 
-class Vampire : public Card {
+class Vampire : public BattleCard {
 public:
     /*
      * C'tor of Vampire class
@@ -33,16 +33,6 @@ private:
     static const int FORCE = 10;
     static const int HP_LOSS = 10;
     static const int LOOT = 2;
-
-    /*
-     * << operator overloading
-     *
-     * @param ostream - I/O stream the info will be forwarded to.
-     * @param Card - Card instance that called the operator.
-     * @return
-     *      I\O stream
-    */
-    friend std::ostream& operator<<(std::ostream& os, const Vampire&);
 };
 
 

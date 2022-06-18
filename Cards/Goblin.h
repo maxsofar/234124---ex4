@@ -1,9 +1,9 @@
 #ifndef EX4_GOBLIN_H
 #define EX4_GOBLIN_H
 
-#include "Card.h"
+#include "BattleCard.h"
 
-class Goblin : public Card {
+class Goblin : public BattleCard {
 public:
     /*
      * C'tor of Goblin class
@@ -34,15 +34,5 @@ private:
     static const int FORCE = 6;
     static const int HP_LOSS = 10;
     static const int LOOT = 2;
-
-    /*
-     * << operator overloading
-     *
-     * @param ostream - I/O stream the info will be forwarded to.
-     * @param Card - Card instance that called the operator.
-     * @return
-     *      I\O stream
-    */
-    friend std::ostream& operator<<(std::ostream& os, const Goblin&);
 };
 #endif //EX4_GOBLIN_H

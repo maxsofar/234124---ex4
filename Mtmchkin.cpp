@@ -17,6 +17,7 @@ Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0)
 m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire"},
 m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
+    printStartGameMessage();
     getCardDeck(fileName);
     getPlayers();
 }
@@ -53,7 +54,6 @@ static void checkCard(const std::vector<string>& cardTypes, const string& card, 
 
 void Mtmchkin::getPlayers()
 {
-    printStartGameMessage();
     printEnterTeamSizeMessage();
 
     string teamSize;
