@@ -27,12 +27,12 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
-
+    void applyEncounter(Player& player) const override;
 
 private:
     static const int FORCE = 6;
     static const int HP_LOSS = 10;
     static const int LOOT = 2;
+
 };
 #endif //EX4_GOBLIN_H

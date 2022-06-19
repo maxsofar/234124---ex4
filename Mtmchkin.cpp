@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "utilities.h"
+#include "Gang.h"
 
 #define MAX_NAME_LEN 15
 #define TEAM_SIZE_RANGE "23456"
@@ -14,7 +15,7 @@ using std::ifstream;
 using std::cin;
 
 Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0),
-m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire"},
+m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire", "Gang"},
 m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
     printStartGameMessage();
@@ -94,9 +95,23 @@ void Mtmchkin::getCardDeck(const string& fileName)
     }
     string card;
     int cardCount = 1;
-    for (; getline(source, card); ++cardCount) {
+    for (; getline(source, card); ++cardCount)
+    {
         checkCard(m_cardTypes, card, cardCount);
-        m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
+
+        if (card == "Gang") {
+            unique_ptr<Gang> gang = unique_ptr<Gang>(new Gang());
+            getline(source, card);
+
+            while (card != "EndGang") {
+                checkCard(m_cardTypes, card, cardCount);
+                gang->setCardStack(m_cardsMap[card]->createInstance());
+                getline(source, card);
+            }
+            m_cardDeck.push_back(move(gang));
+        } else {
+            m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
+        }
     }
     if (cardCount < MIN_DECK_SIZE) {
         throw(DeckFileInvalidSize());

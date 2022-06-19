@@ -27,6 +27,6 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
+    void applyEncounter(Player& player) const override;
 };
 #endif //EX4_MERCHANT_H

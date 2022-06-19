@@ -8,7 +8,7 @@ using std::string;
 Merchant::Merchant() : Card(CardStats (), "Merchant")
 {}
 
-void Merchant::applyEncounter(Player &player)
+void Merchant::applyEncounter(Player &player) const
 {
     printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
     string input;

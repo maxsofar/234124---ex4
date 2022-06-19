@@ -3,7 +3,7 @@
 Dragon::Dragon() : BattleCard(CardStats (FORCE, HP_LOSS, 0, LOOT), "Dragon")
 {}
 
-void Dragon::applyEncounter(Player &player)
+void Dragon::applyEncounter(Player &player) const
 {
     if (player.getAttackStrength() >= m_stats.force) {
         player.levelUp();

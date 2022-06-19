@@ -27,8 +27,7 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
-
+    void applyEncounter(Player& player) const override;
 
 private:
     static const int FORCE = 25;

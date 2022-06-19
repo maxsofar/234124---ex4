@@ -96,6 +96,8 @@ private:
     *          void
     */
     void playNextCard(Player& somePlayer);
+
+    //TODO: add constri\uctors bitch
 };
 
 #endif /* MTMCHKIN_H_ */

@@ -27,7 +27,9 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
+    void applyEncounter(Player& player) const override;
+
+    bool applyGangEncounter(Player& player, bool isLost) const override;
 
 private:
     static const int FORCE = 10;

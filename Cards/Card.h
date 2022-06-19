@@ -39,7 +39,7 @@ public:
      * @return
      *      void
     */
-    virtual void applyEncounter(Player& player) = 0;
+    virtual void applyEncounter(Player& player) const = 0;
 
     /*
      * Default D'tor
@@ -64,7 +64,6 @@ protected:
     Card& operator=(const Card& other) = default;
 
     CardStats m_stats;
-
     std::string m_name;
 private:
     /*
