@@ -2,9 +2,6 @@
 #define EX4_PLAYERSFACTORY_H
 
 #include "Player.h"
-#include "Fighter.h"
-#include "Rogue.h"
-#include "Wizard.h"
 #include <string>
 #include <unordered_map>
 #include <memory>

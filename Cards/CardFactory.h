@@ -2,14 +2,6 @@
 #define EX4_CARDFACTORY_H
 
 #include "Card.h"
-#include "Barfight.h"
-#include "Vampire.h"
-#include "Fairy.h"
-#include "Dragon.h"
-#include "Goblin.h"
-#include "Pitfall.h"
-#include "Treasure.h"
-#include "Merchant.h"
 #include <string>
 #include <unordered_map>
 #include <memory>

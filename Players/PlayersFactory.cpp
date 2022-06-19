@@ -1,4 +1,7 @@
 #include "PlayersFactory.h"
+#include "Fighter.h"
+#include "Rogue.h"
+#include "Wizard.h"
 
 using namespace PlayersFactory;
 using std::unique_ptr;

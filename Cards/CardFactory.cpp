@@ -1,4 +1,12 @@
 #include "CardFactory.h"
+#include "Barfight.h"
+#include "Vampire.h"
+#include "Fairy.h"
+#include "Dragon.h"
+#include "Goblin.h"
+#include "Pitfall.h"
+#include "Treasure.h"
+#include "Merchant.h"
 
 using namespace CardFactory;
 using std::unique_ptr;
