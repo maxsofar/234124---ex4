@@ -66,6 +66,7 @@ private:
     int m_roundCounter;
     int m_numOfPlayers;
     const std::vector<std::string> m_cardTypes;
+    const std::vector<std::string> m_battleCardTypes;
     const std::vector<std::string> m_gameClasses;
 
     CardFactory::CardsMap m_cardsMap;
@@ -96,6 +97,9 @@ private:
     *          void
     */
     void playNextCard(Player& somePlayer);
+
+
+    void checkCard(const std::string& card, int line, bool isGang = false) const;
 
     //TODO: add constri\uctors bitch
 };

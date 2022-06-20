@@ -14,3 +14,16 @@ void Dragon::applyEncounter(Player &player) const
         printLossBattle(player.getName(), "Dragon");
     }
 }
+
+bool Dragon::applyGangEncounter(Player &player, bool isLost) const
+{
+    if (!isLost && player.getAttackStrength() >= m_stats.force) {
+        player.addCoins(m_stats.loot);
+        printWinBattle(player.getName(), "Dragon");
+        return false;
+    } else {
+        player.damage(m_stats.hpLossOnDefeat);
+        printLossBattle(player.getName(), "Dragon");
+        return true;
+    }
+}

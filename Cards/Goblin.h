@@ -29,6 +29,8 @@ public:
     */
     void applyEncounter(Player& player) const override;
 
+    bool applyGangEncounter(Player& player, bool isLost) const override;
+
 private:
     static const int FORCE = 6;
     static const int HP_LOSS = 10;

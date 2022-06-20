@@ -15,7 +15,8 @@ using std::ifstream;
 using std::cin;
 
 Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0),
-m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire", "Gang"},
+m_cardTypes {"Barfight", "Fairy", "Merchant", "Pitfall", "Treasure", "Dragon", "Goblin", "Vampire"},
+m_battleCardTypes {"Dragon", "Goblin", "Vampire"},
 m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
     printStartGameMessage();
@@ -46,11 +47,23 @@ static bool checkClass(const std::vector<string>& gameClasses, const string& pla
     return false;
 }
 
-static void checkCard(const std::vector<string>& cardTypes, const string& card, int line)
+void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
 {
-    if (std::find(cardTypes.begin(), cardTypes.end(), card) == cardTypes.end()) {
+    bool isCardInDeck = true;
+    if (!isGang) {
+        if (std::find(m_cardTypes.begin(), m_cardTypes.end(), card) == m_cardTypes.end()) {
+            isCardInDeck = false;
+        }
+    } else {
+        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card) == m_battleCardTypes.end()) {
+            isCardInDeck = false;
+        }
+    }
+    
+    if (!isCardInDeck) {
         throw(DeckFileFormatError(line));
     }
+
 }
 
 void Mtmchkin::getPlayers()
@@ -94,22 +107,28 @@ void Mtmchkin::getCardDeck(const string& fileName)
         throw(DeckFileNotFound());
     }
     string card;
-    int cardCount = 1;
+    int cardCount = 1, gangCount = 0;
     for (; getline(source, card); ++cardCount)
     {
-        checkCard(m_cardTypes, card, cardCount);
-
-        if (card == "Gang") {
+        if (card == "Gang")
+        {
             unique_ptr<Gang> gang = unique_ptr<Gang>(new Gang());
             getline(source, card);
 
             while (card != "EndGang") {
-                checkCard(m_cardTypes, card, cardCount);
+                checkCard(card, cardCount + gangCount, true);
                 gang->setCardStack(m_cardsMap[card]->createInstance());
                 getline(source, card);
+                ++gangCount;
+                ++cardCount;
+                if (cin.eof()) {
+                    throw (DeckFileFormatError(cardCount));
+                }
             }
             m_cardDeck.push_back(move(gang));
+            gangCount = 0;
         } else {
+            checkCard(card, cardCount - gangCount);
             m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
         }
     }
