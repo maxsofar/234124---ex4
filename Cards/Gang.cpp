@@ -1,4 +1,5 @@
 #include "Gang.h"
+#include <iostream>
 
 typedef std::unique_ptr<BattleCard> CardPtr;
 
@@ -14,7 +15,6 @@ void Gang::setCardStack(std::unique_ptr<Card> cardPtr)
         battleCardPtr.reset(tmp);
     }
     m_cardDeck.push_back(move(battleCardPtr));
-    //m_cardDeck.push_back(move(cardPtr));
 }
 
 void Gang::applyEncounter(Player &player) const
@@ -27,5 +27,6 @@ void Gang::applyEncounter(Player &player) const
     }
     if (!isLost) {
         player.levelUp();
+        std::cout << "Player " << player.getName() << " has defeated Gang and rose 1 Level!" << std::endl;
     }
 }
