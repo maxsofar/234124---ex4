@@ -71,17 +71,17 @@ void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
 
 void Mtmchkin::getTeamSize()
 {
-    string teamSize;
+    string input;
     while(true)
     {
         printEnterTeamSizeMessage();
-        getline(cin, teamSize, '\n');
-        if (cin.fail() || cin.eof() || teamSize.empty() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
+        getline(cin, input, '\n');
+        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
             printInvalidTeamSize();
         }
         else
         {
-            int x = std::stoi(teamSize);
+            int x = std::stoi(input);
             if (x < 2 || x > 6) {
                 printInvalidTeamSize();
             } else {
