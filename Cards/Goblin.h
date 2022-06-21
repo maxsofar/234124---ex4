@@ -14,11 +14,15 @@ public:
     Goblin();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Goblin() override = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
     Goblin(const Goblin&) = delete;
-    Goblin& operator=(const Goblin&) = default;
+    Goblin& operator=(const Goblin&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Goblin card:

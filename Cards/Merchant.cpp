@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#define AVAILABLE_CHOICES "012"
+
 using std::cin;
 using std::string;
 
@@ -15,7 +17,7 @@ void Merchant::applyEncounter(Player &player) const
     int intInput;
     while(true) {
         getline(cin, input);
-        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of("012") != string::npos) {
+        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of(AVAILABLE_CHOICES) != string::npos) {
             printInvalidInput();
         } else {
             intInput = std::stoi(input);
@@ -34,9 +36,7 @@ void Merchant::applyEncounter(Player &player) const
             if (player.pay(5)) {
                 player.heal(1);
                 printMerchantSummary(std::cout, player.getName(), 1, 5);
-            }
-            else
-            {
+            } else {
                 printMerchantInsufficientCoins(std::cout);
                 printMerchantSummary(std::cout, player.getName(), 1, 0);
             }
@@ -48,9 +48,7 @@ void Merchant::applyEncounter(Player &player) const
             if (player.pay(10)) {
                 player.buff(1);
                 printMerchantSummary(std::cout, player.getName(), 2, 10);
-            }
-            else
-            {
+            } else {
                 printMerchantInsufficientCoins(std::cout);
                 printMerchantSummary(std::cout, player.getName(), 2, 0);
             }

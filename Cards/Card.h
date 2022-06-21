@@ -46,6 +46,12 @@ public:
      */
     virtual ~Card() = default;
 
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Card(const Card&) = delete;
+    Card& operator=(const Card& other) = delete;
+
 protected:
     /*
      * C'tor of Card class
@@ -56,12 +62,6 @@ protected:
      *      A new instance of Card.
     */
     Card(const CardStats& stats, const std::string& name);
-
-    /*
-     * Here we are explicitly telling the compiler to use the default methods
-    */
-    Card(const Card&) = default;
-    Card& operator=(const Card& other) = default;
 
     CardStats m_stats;
     std::string m_name;

@@ -14,11 +14,15 @@ public:
     Dragon();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Dragon() override = default;
-    Dragon(const Dragon&) = default;
-    Dragon& operator=(const Dragon&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Dragon(const Dragon&) = delete;
+    Dragon& operator=(const Dragon&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Dragon card:

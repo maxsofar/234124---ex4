@@ -15,11 +15,15 @@ public:
     explicit Wizard(const std::string& playerName);
 
     /*
-     * Default D'tor, copy C'tor, assignment operator overload
+     * Default D'tor
      */
     ~Wizard() override = default;
-    Wizard(const Wizard&) = default;
-    Wizard& operator=(const Wizard&) = default;
+
+    /*
+     * Explicitly deleted Copy C'tor and Assignment operator
+     */
+    Wizard(const Wizard&) = delete;
+    Wizard& operator=(const Wizard&) = delete;
 
     /*
      * Increase the player's HP by given number of points with the limit of maxHP

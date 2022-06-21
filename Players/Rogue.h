@@ -15,13 +15,6 @@ public:
     explicit Rogue(const std::string& playerName);
 
     /*
-     * Default D'tor, copy C'tor, assignment operator overload
-     */
-    ~Rogue() override = default;
-    Rogue(const Rogue&) = default;
-    Rogue& operator=(const Rogue&) = default;
-
-    /*
      * Increase the amount of player's coins by given number
      * @param amount - number of coins to be added
      *
@@ -29,6 +22,17 @@ public:
      *      void
      */
     void addCoins(int amount) override;
+
+    /*
+     * Default D'tor
+     */
+    ~Rogue() override = default;
+
+    /*
+     * Explicitly deleted Copy C'tor and Assignment operator
+     */
+    Rogue(const Rogue&) = delete;
+    Rogue& operator=(const Rogue&) = delete;
 
 private:
     static const int LOOT_MULTIPLIER = 2;

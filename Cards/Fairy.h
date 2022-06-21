@@ -14,11 +14,15 @@ public:
     Fairy();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
-   */
+     * Default D'tor
+    */
     ~Fairy() override = default;
-    Fairy(const Fairy&) = default;
-    Fairy& operator=(const Fairy&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Fairy(const Fairy&) = delete;
+    Fairy& operator=(const Fairy&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Fairy card:

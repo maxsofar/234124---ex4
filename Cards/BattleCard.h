@@ -6,11 +6,23 @@
 class BattleCard : public Card {
 public:
     /*
+     * Handles Gang card
+     *
+     * @param player - the player that encountered the card
+     * @param isLost - indicator for lose to one of the cards in Gang
+     */
+    virtual bool applyGangEncounter(Player &player, bool isLost) const;
+
+    /*
      * Default D'tor
      */
     ~BattleCard() override = default;
 
-    virtual bool applyGangEncounter(Player &player, bool isLost) const;
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    BattleCard(const BattleCard&) = delete;
+    BattleCard& operator=(const BattleCard& other) = delete;
 
 protected:
     /*
@@ -22,12 +34,6 @@ protected:
      *      A new instance of BattleCard.
     */
     BattleCard(const CardStats& stats, const std::string& name);
-
-    /*
-     * Here we are explicitly telling the compiler to use the default methods
-    */
-    BattleCard(const BattleCard&) = default;
-    BattleCard& operator=(const BattleCard& other) = default;
 
 private:
     /*

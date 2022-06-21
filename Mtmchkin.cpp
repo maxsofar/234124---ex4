@@ -55,7 +55,9 @@ void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
             isCardInDeck = false;
         }
     } else {
-        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card) == m_battleCardTypes.end()) {
+        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card)
+            == m_battleCardTypes.end())
+        {
             isCardInDeck = false;
         }
     }
