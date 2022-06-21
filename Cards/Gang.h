@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 
-class Gang : public Card {
+class Gang : public BattleCard {
 public:
     /*
      * C'tor of Gang class
@@ -17,13 +17,24 @@ public:
     Gang();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Defaukt D'tor
    */
     ~Gang() override = default;
-    Gang(const Gang&) = default;
-    Gang& operator=(const Gang&) = default;
 
-    void setCardStack(std::unique_ptr<Card> cardPtr); //TODO: docs
+    /*
+     * Explicitly deleted Copy C'tor and assignment operator
+     */
+    Gang(const Gang&) = delete;
+    Gang& operator=(const Gang&) = delete;
+
+    /*
+     * Receives and stores cards belongs to the Gang
+     *
+     * @param cardPtr - pointer to card instance
+     * @return
+     *          void
+     */
+    void setCardStack(std::unique_ptr<Card> cardPtr);
 
     /*
      * Handling the player's applyEncounter with the Gang card:

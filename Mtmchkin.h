@@ -98,10 +98,16 @@ private:
     */
     void playNextCard(Player& somePlayer);
 
-
+    /*
+     * Checks if card has a right name
+     * @param card   - card name to be checked
+     * @param line   - line number
+     * @param isGang - indicates if the card is part of Gang
+     * @return
+     *          void
+     */
     void checkCard(const std::string& card, int line, bool isGang = false) const;
 
-    //TODO: add constri\uctors bitch
 };
 
 #endif /* MTMCHKIN_H_ */

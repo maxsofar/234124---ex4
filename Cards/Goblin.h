@@ -17,7 +17,7 @@ public:
     * Here we are explicitly telling the compiler to use the default methods
    */
     ~Goblin() override = default;
-    Goblin(const Goblin&) = default;
+    Goblin(const Goblin&) = delete;
     Goblin& operator=(const Goblin&) = default;
 
     /*
@@ -28,8 +28,6 @@ public:
      *      void
     */
     void applyEncounter(Player& player) const override;
-
-    bool applyGangEncounter(Player& player, bool isLost) const override;
 
 private:
     static const int FORCE = 6;

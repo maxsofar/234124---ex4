@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "utilities.h"
-#include "Gang.h"
+#include "Cards/Gang.h"
 
 #define MAX_NAME_LEN 15
 #define TEAM_SIZE_RANGE "23456"
@@ -68,16 +68,20 @@ void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
 
 void Mtmchkin::getPlayers()
 {
-    printEnterTeamSizeMessage();
-
     string teamSize;
     while(true) {
-        getline(cin, teamSize);
-        if (cin.fail() || cin.eof() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
+        printEnterTeamSizeMessage();
+        getline(cin, teamSize, '\n');
+        if (cin.fail() || cin.eof() || teamSize.empty() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
             printInvalidTeamSize();
         } else {
-            m_numOfPlayers = std::stoi(teamSize);
-            break;
+            int x = std::stoi(teamSize);
+            if (x < 2 || x > 6) {
+                printInvalidTeamSize();
+            } else {
+                m_numOfPlayers = x;
+                break;
+            }
         }
     }
 
@@ -107,7 +111,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
         throw(DeckFileNotFound());
     }
     string card;
-    int cardCount = 1, gangCount = 0;
+    int cardCount = 0, gangCount = 0;
     for (; getline(source, card); ++cardCount)
     {
         if (card == "Gang")
@@ -116,7 +120,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
             getline(source, card);
 
             while (card != "EndGang") {
-                checkCard(card, cardCount + gangCount, true);
+                checkCard(card, cardCount + gangCount + 1, true);
                 gang->setCardStack(m_cardsMap[card]->createInstance());
                 getline(source, card);
                 ++gangCount;
@@ -128,7 +132,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
             m_cardDeck.push_back(move(gang));
             gangCount = 0;
         } else {
-            checkCard(card, cardCount - gangCount);
+            checkCard(card, cardCount - gangCount + 1);
             m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
         }
     }
@@ -192,8 +196,7 @@ void Mtmchkin::playRound()
             m_winners.push_back(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
-        }
-        if (m_numOfPlayers > 1) {
+        } else if (m_numOfPlayers > 1) {
             m_players.push_back(move(m_players.front()));
             m_players.pop_front();
         }

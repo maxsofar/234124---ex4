@@ -3,8 +3,13 @@
 
 typedef std::unique_ptr<BattleCard> CardPtr;
 
-Gang::Gang() : Card(CardStats (), "Gang")
+Gang::Gang() : BattleCard(CardStats (), "Gang")
 {}
+
+static void printWinMessage(Player &player)
+{
+    std::cout << "Player " << player.getName() << " has defeated Gang and rose 1 Level!" << std::endl;
+}
 
 void Gang::setCardStack(std::unique_ptr<Card> cardPtr)
 {
@@ -27,6 +32,6 @@ void Gang::applyEncounter(Player &player) const
     }
     if (!isLost) {
         player.levelUp();
-        std::cout << "Player " << player.getName() << " has defeated Gang and rose 1 Level!" << std::endl;
+        printWinMessage(player);
     }
 }

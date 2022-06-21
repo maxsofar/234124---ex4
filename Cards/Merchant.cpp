@@ -15,7 +15,7 @@ void Merchant::applyEncounter(Player &player) const
     int intInput;
     while(true) {
         getline(cin, input);
-        if (cin.fail() || cin.eof() || input.find_first_not_of("012") != string::npos) {
+        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of("012") != string::npos) {
             printInvalidInput();
         } else {
             intInput = std::stoi(input);
@@ -38,6 +38,7 @@ void Merchant::applyEncounter(Player &player) const
             else
             {
                 printMerchantInsufficientCoins(std::cout);
+                printMerchantSummary(std::cout, player.getName(), 1, 0);
             }
         }
             break;
@@ -51,6 +52,7 @@ void Merchant::applyEncounter(Player &player) const
             else
             {
                 printMerchantInsufficientCoins(std::cout);
+                printMerchantSummary(std::cout, player.getName(), 2, 0);
             }
         }
             break;

@@ -27,6 +27,7 @@ bool BattleCard::applyGangEncounter(Player &player, bool isLost) const
         return false;
     } else {
         player.damage(m_stats.hpLossOnDefeat);
+        printLossBattle(player.getName(), m_name);
         return true;
     }
 }
