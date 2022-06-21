@@ -14,11 +14,15 @@ public:
     Barfight();
 
     /*
-     * Here we are explicitly telling the compiler to use the default methods
+     * Default D'tor
     */
     ~Barfight() override = default;
-    Barfight(const Barfight&) = default;
-    Barfight& operator=(const Barfight&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Barfight(const Barfight&) = delete;
+    Barfight& operator=(const Barfight&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Barfight card:

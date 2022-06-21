@@ -14,20 +14,15 @@ public:
     Goblin();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Goblin() override = default;
-    Goblin(const Goblin&) = delete;
-    Goblin& operator=(const Goblin&) = default;
 
     /*
-     * Handling the player's applyEncounter with the Goblin card:
-     *
-     * @param player - The player.
-     * @return
-     *      void
+     * Deleted Copy C'tor and assignment operator
     */
-    void applyEncounter(Player& player) const override;
+    Goblin(const Goblin&) = delete;
+    Goblin& operator=(const Goblin&) = delete;
 
 private:
     static const int FORCE = 6;

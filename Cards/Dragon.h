@@ -14,24 +14,28 @@ public:
     Dragon();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Dragon() override = default;
-    Dragon(const Dragon&) = default;
-    Dragon& operator=(const Dragon&) = default;
 
     /*
-     * Handling the player's applyEncounter with the Dragon card:
-     *
-     * @param player - The player.
-     * @return
-     *      void
+     * Deleted Copy C'tor and assignment operator
     */
-    void applyEncounter(Player& player) const override;
+    Dragon(const Dragon&) = delete;
+    Dragon& operator=(const Dragon&) = delete;
 
 private:
     static const int FORCE = 25;
     static const int HP_LOSS = 999999;
     static const int LOOT = 1000;
+
+    /*
+     * Prints card info
+     *
+     * @param ostream - I/O stream the info will be forwarded to.
+     * @return
+     *           void
+    */
+    void print(std::ostream& os) const override;
 };
 #endif //EX4_DRAGON_H

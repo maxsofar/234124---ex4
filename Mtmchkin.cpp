@@ -21,7 +21,8 @@ m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
     printStartGameMessage();
     getCardDeck(fileName);
-    getPlayers();
+    getTeamSize();
+    getPlayersNames();
 }
 
 static bool checkName(const string& name) {
@@ -55,7 +56,9 @@ void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
             isCardInDeck = false;
         }
     } else {
-        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card) == m_battleCardTypes.end()) {
+        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card)
+            == m_battleCardTypes.end())
+        {
             isCardInDeck = false;
         }
     }
@@ -66,16 +69,19 @@ void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
 
 }
 
-void Mtmchkin::getPlayers()
+void Mtmchkin::getTeamSize()
 {
-    string teamSize;
-    while(true) {
+    string input;
+    while(true)
+    {
         printEnterTeamSizeMessage();
-        getline(cin, teamSize, '\n');
-        if (cin.fail() || cin.eof() || teamSize.empty() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
+        getline(cin, input, '\n');
+        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
             printInvalidTeamSize();
-        } else {
-            int x = std::stoi(teamSize);
+        }
+        else
+        {
+            int x = std::stoi(input);
             if (x < 2 || x > 6) {
                 printInvalidTeamSize();
             } else {
@@ -84,12 +90,16 @@ void Mtmchkin::getPlayers()
             }
         }
     }
+}
 
+void Mtmchkin::getPlayersNames()
+{
     string inputName, inputClass;
     int counter = m_numOfPlayers;
     do {
         printInsertPlayerMessage();
-        while (true) {
+        while (true)
+        {
             getline(cin, inputName, ' ');
             getline(cin, inputClass);
             if (!checkName(inputName)) {

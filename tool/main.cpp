@@ -8,14 +8,9 @@ int main() {
             game.printLeaderBoard();
         }
     }
-    catch(const DeckFileInvalidSize& error){
+    catch(const Exception& error){
         std::cout << error.what()  << std::endl;
     }
-    catch(const DeckFileNotFound& error){
-        std::cout << error.what()  << std::endl;
-    }
-    catch(const DeckFileFormatError& error){
-        std::cout << error.what()  << std::endl;
-    }
+
     return 0;
 }

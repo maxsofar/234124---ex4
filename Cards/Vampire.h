@@ -14,13 +14,6 @@ public:
     Vampire();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
-   */
-    ~Vampire() override = default;
-    Vampire(const Vampire&) = default;
-    Vampire& operator=(const Vampire&) = default;
-
-    /*
      * Handling the player's applyEncounter with the Vampire card:
      *
      * @param player - The player.
@@ -29,7 +22,24 @@ public:
     */
     void applyEncounter(Player& player) const override;
 
+    /*
+     * Handles Gang card
+     *
+     * @param player - the player that encountered the card
+     * @param isLost - indicator for lose to one of the cards in Gang
+     */
     bool applyGangEncounter(Player& player, bool isLost) const override;
+
+    /*
+     * Default D'tor
+     */
+    ~Vampire() override = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Vampire(const Vampire&) = delete;
+    Vampire& operator=(const Vampire&) = delete;
 
 private:
     static const int FORCE = 10;

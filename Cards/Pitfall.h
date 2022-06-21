@@ -14,11 +14,15 @@ public:
     Pitfall();
 
     /*
-     * Here we are explicitly telling the compiler to use the default methods
+     * Default D'tor
     */
     ~Pitfall() override = default;
-    Pitfall(const Pitfall&) = default;
-    Pitfall& operator=(const Pitfall&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Pitfall(const Pitfall&) = delete;
+    Pitfall& operator=(const Pitfall&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Pitfall card:

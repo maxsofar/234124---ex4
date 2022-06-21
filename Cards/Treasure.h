@@ -14,11 +14,15 @@ public:
     Treasure();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Treasure() override = default;
-    Treasure(const Treasure&) = default;
-    Treasure& operator=(const Treasure&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Treasure(const Treasure&) = delete;
+    Treasure& operator=(const Treasure&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Treasure card:

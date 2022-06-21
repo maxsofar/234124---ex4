@@ -16,19 +16,23 @@ public:
     explicit Fighter(const std::string& playerName);
 
     /*
-     * Default D'tor, copy C'tor, assignment operator overload
-     */
-    ~Fighter() override = default;
-    Fighter(const Fighter&) = default;
-    Fighter& operator=(const Fighter&) = default;
-
-    /*
      * Get the attack strength of the player
      *
      * @return
      *      the sum of force points and player's level
      */
-    int getAttackStrength() override;
+    int getAttackStrength() const override;
+
+    /*
+     * Default D'tor
+     */
+    ~Fighter() override = default;
+
+    /*
+     * Explicitly deleted Copy C'tor and Assignment operator
+     */
+    Fighter(const Fighter&) = delete;
+    Fighter& operator=(const Fighter&) = delete;
 
 private:
     static const int FORCE_MULTIPLIER = 2;

@@ -14,11 +14,15 @@ public:
     Merchant();
 
     /*
-    * Here we are explicitly telling the compiler to use the default methods
+    * Default D'tor
    */
     ~Merchant() override = default;
-    Merchant(const Merchant&) = default;
-    Merchant& operator=(const Merchant&) = default;
+
+    /*
+     * Deleted Copy C'tor and assignment operator
+    */
+    Merchant(const Merchant&) = delete;
+    Merchant& operator=(const Merchant&) = delete;
 
     /*
      * Handling the player's applyEncounter with the Merchant card:

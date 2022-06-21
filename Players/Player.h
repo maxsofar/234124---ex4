@@ -15,7 +15,7 @@ public:
      * @return
      *      String with name of a character
      */
-    std::string getCharacter() const;
+    Character getCharacter() const;
 
     /*
      * Returns the name of the player
@@ -24,6 +24,14 @@ public:
      *      String with name of a player
      */
     std::string getName() const;
+
+    /*
+     * Returns the name of the player's character
+     *
+     * @return
+     *      String with name of a character
+     */
+    std::string getCharacterName() const;
 
     /*
      * Returns the amount of player's coins
@@ -118,12 +126,18 @@ public:
      * @return
      *      the sum of force points and player's level
      */
-    virtual int getAttackStrength();
+    virtual int getAttackStrength() const;
 
     /*
      * Default D'tor
      */
     virtual ~Player() = default;
+
+    /*
+     * Explicitly deleted Copy C'tor and Assignment operator
+     */
+    Player(const Player &) = delete;
+    Player &operator=(const Player &) = delete;
 
 protected:
     /*
@@ -135,14 +149,6 @@ protected:
      *      An instance of Player
      */
     Player(const std::string& playerName, Character someCharacter);
-
-    /*
-     * copy C'tor, assignment operator overload
-     */
-
-    Player(const Player &) = default;
-
-    Player &operator=(const Player &) = default;
 
     std::string m_name;
     int m_level;
