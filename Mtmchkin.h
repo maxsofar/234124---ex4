@@ -82,12 +82,20 @@ private:
     void getCardDeck(const std::string& fileName);
 
     /*
-    *   Receives and stores players.
+    *   Receives and checks team size input.
     *
     *  @return
     *          void
     */
-    void getPlayers();
+    void getTeamSize();
+
+    /*
+    *   Receives and checks players names.
+    *
+    *  @return
+    *          void
+    */
+    void getPlayersNames();
 
     /*
     *  Plays next card with given player, and shuffles the card deck
