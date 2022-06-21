@@ -7,6 +7,7 @@
 #include "Pitfall.h"
 #include "Treasure.h"
 #include "Merchant.h"
+#include "Gang.h"
 
 using namespace CardFactory;
 using std::unique_ptr;
@@ -21,6 +22,7 @@ CardsMap::CardsMap()
     cardsMap["Goblin"] = unique_ptr<CardFactory<Goblin>>(new CardFactory<Goblin>());
     cardsMap["Merchant"] = unique_ptr<CardFactory<Merchant>>(new CardFactory<Merchant>());
     cardsMap["Treasure"] = unique_ptr<CardFactory<Treasure>>(new CardFactory<Treasure>());
+    cardsMap["Gang"] = unique_ptr<CardFactory<Gang>>(new CardFactory<Gang>());
 }
 
 unique_ptr<Factory>& CardsMap::operator[](const std::string &cardName)

@@ -19,3 +19,15 @@ std::ostream& operator<<(std::ostream& os, const BattleCard& someCard)
     someCard.print(os);
     return os;
 }
+
+bool BattleCard::applyGangEncounter(Player &player, bool isLost) const
+{
+    if (!isLost && player.getAttackStrength() >= m_stats.force) {
+        player.addCoins(m_stats.loot);
+        return false;
+    } else {
+        player.damage(m_stats.hpLossOnDefeat);
+        printLossBattle(player.getName(), m_name);
+        return true;
+    }
+}

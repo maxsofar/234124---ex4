@@ -10,6 +10,8 @@ public:
      */
     ~BattleCard() override = default;
 
+    virtual bool applyGangEncounter(Player &player, bool isLost) const;
+
 protected:
     /*
      * C'tor of BattleCard class

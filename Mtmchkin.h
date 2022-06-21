@@ -66,6 +66,7 @@ private:
     int m_roundCounter;
     int m_numOfPlayers;
     const std::vector<std::string> m_cardTypes;
+    const std::vector<std::string> m_battleCardTypes;
     const std::vector<std::string> m_gameClasses;
 
     CardFactory::CardsMap m_cardsMap;
@@ -96,6 +97,17 @@ private:
     *          void
     */
     void playNextCard(Player& somePlayer);
+
+    /*
+     * Checks if card has a right name
+     * @param card   - card name to be checked
+     * @param line   - line number
+     * @param isGang - indicates if the card is part of Gang
+     * @return
+     *          void
+     */
+    void checkCard(const std::string& card, int line, bool isGang = false) const;
+
 };
 
 #endif /* MTMCHKIN_H_ */

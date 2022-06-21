@@ -3,7 +3,7 @@
 Goblin::Goblin() : BattleCard(CardStats(FORCE, HP_LOSS, 0, LOOT), "Goblin")
 {}
 
-void Goblin::applyEncounter(Player &player)
+void Goblin::applyEncounter(Player &player) const
 {
     if (player.getAttackStrength() >= m_stats.force) {
         player.levelUp();

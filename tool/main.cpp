@@ -2,7 +2,7 @@
 
 int main() {
     try{
-        Mtmchkin game("deck.txt");
+        Mtmchkin game("../deck.txt");
         while(!game.isGameOver() && game.getNumberOfRounds() < 100){
             game.playRound();
             game.printLeaderBoard();

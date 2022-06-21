@@ -8,14 +8,14 @@ using std::string;
 Merchant::Merchant() : Card(CardStats (), "Merchant")
 {}
 
-void Merchant::applyEncounter(Player &player)
+void Merchant::applyEncounter(Player &player) const
 {
     printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
     string input;
     int intInput;
     while(true) {
         getline(cin, input);
-        if (cin.fail() || cin.eof() || input.find_first_not_of("012") != string::npos) {
+        if (cin.fail() || cin.eof() || input.empty() || input.find_first_not_of("012") != string::npos) {
             printInvalidInput();
         } else {
             intInput = std::stoi(input);
@@ -38,6 +38,7 @@ void Merchant::applyEncounter(Player &player)
             else
             {
                 printMerchantInsufficientCoins(std::cout);
+                printMerchantSummary(std::cout, player.getName(), 1, 0);
             }
         }
             break;
@@ -51,6 +52,7 @@ void Merchant::applyEncounter(Player &player)
             else
             {
                 printMerchantInsufficientCoins(std::cout);
+                printMerchantSummary(std::cout, player.getName(), 2, 0);
             }
         }
             break;

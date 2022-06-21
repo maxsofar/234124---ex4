@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "utilities.h"
+#include "Cards/Gang.h"
 
 #define MAX_NAME_LEN 15
 #define TEAM_SIZE_RANGE "23456"
@@ -14,7 +15,8 @@ using std::ifstream;
 using std::cin;
 
 Mtmchkin::Mtmchkin(const string fileName) : m_roundCounter(0), m_numOfPlayers(0),
-m_cardTypes {"Barfight", "Dragon", "Fairy", "Goblin", "Merchant", "Pitfall", "Treasure", "Vampire"},
+m_cardTypes {"Barfight", "Fairy", "Merchant", "Pitfall", "Treasure", "Dragon", "Goblin", "Vampire"},
+m_battleCardTypes {"Dragon", "Goblin", "Vampire"},
 m_gameClasses{"Fighter", "Rogue", "Wizard"}
 {
     printStartGameMessage();
@@ -45,25 +47,41 @@ static bool checkClass(const std::vector<string>& gameClasses, const string& pla
     return false;
 }
 
-static void checkCard(const std::vector<string>& cardTypes, const string& card, int line)
+void Mtmchkin::checkCard(const string& card, int line, bool isGang) const
 {
-    if (std::find(cardTypes.begin(), cardTypes.end(), card) == cardTypes.end()) {
+    bool isCardInDeck = true;
+    if (!isGang) {
+        if (std::find(m_cardTypes.begin(), m_cardTypes.end(), card) == m_cardTypes.end()) {
+            isCardInDeck = false;
+        }
+    } else {
+        if (std::find(m_battleCardTypes.begin(), m_battleCardTypes.end(), card) == m_battleCardTypes.end()) {
+            isCardInDeck = false;
+        }
+    }
+    
+    if (!isCardInDeck) {
         throw(DeckFileFormatError(line));
     }
+
 }
 
 void Mtmchkin::getPlayers()
 {
-    printEnterTeamSizeMessage();
-
     string teamSize;
     while(true) {
-        getline(cin, teamSize);
-        if (cin.fail() || cin.eof() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
+        printEnterTeamSizeMessage();
+        getline(cin, teamSize, '\n');
+        if (cin.fail() || cin.eof() || teamSize.empty() || teamSize.find_first_not_of(TEAM_SIZE_RANGE) != string::npos) {
             printInvalidTeamSize();
         } else {
-            m_numOfPlayers = std::stoi(teamSize);
-            break;
+            int x = std::stoi(teamSize);
+            if (x < 2 || x > 6) {
+                printInvalidTeamSize();
+            } else {
+                m_numOfPlayers = x;
+                break;
+            }
         }
     }
 
@@ -93,10 +111,30 @@ void Mtmchkin::getCardDeck(const string& fileName)
         throw(DeckFileNotFound());
     }
     string card;
-    int cardCount = 1;
-    for (; getline(source, card); ++cardCount) {
-        checkCard(m_cardTypes, card, cardCount);
-        m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
+    int cardCount = 0, gangCount = 0;
+    for (; getline(source, card); ++cardCount)
+    {
+        if (card == "Gang")
+        {
+            unique_ptr<Gang> gang = unique_ptr<Gang>(new Gang());
+            getline(source, card);
+
+            while (card != "EndGang") {
+                checkCard(card, cardCount + gangCount + 1, true);
+                gang->setCardStack(m_cardsMap[card]->createInstance());
+                getline(source, card);
+                ++gangCount;
+                ++cardCount;
+                if (cin.eof()) {
+                    throw (DeckFileFormatError(cardCount));
+                }
+            }
+            m_cardDeck.push_back(move(gang));
+            gangCount = 0;
+        } else {
+            checkCard(card, cardCount - gangCount + 1);
+            m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
+        }
     }
     if (cardCount < MIN_DECK_SIZE) {
         throw(DeckFileInvalidSize());
@@ -158,8 +196,7 @@ void Mtmchkin::playRound()
             m_winners.push_back(move(m_players.front()));
             m_players.pop_front();
             --m_numOfPlayers;
-        }
-        if (m_numOfPlayers > 1) {
+        } else if (m_numOfPlayers > 1) {
             m_players.push_back(move(m_players.front()));
             m_players.pop_front();
         }
