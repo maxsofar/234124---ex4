@@ -24,15 +24,6 @@ public:
     Goblin(const Goblin&) = delete;
     Goblin& operator=(const Goblin&) = delete;
 
-    /*
-     * Handling the player's applyEncounter with the Goblin card:
-     *
-     * @param player - The player.
-     * @return
-     *      void
-    */
-    void applyEncounter(Player& player) const override;
-
 private:
     static const int FORCE = 6;
     static const int HP_LOSS = 10;

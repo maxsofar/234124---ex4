@@ -15,7 +15,7 @@ public:
      * @return
      *      String with name of a character
      */
-    std::string getCharacter() const;
+    Character getCharacter() const;
 
     /*
      * Returns the name of the player
@@ -24,6 +24,14 @@ public:
      *      String with name of a player
      */
     std::string getName() const;
+
+    /*
+     * Returns the name of the player's character
+     *
+     * @return
+     *      String with name of a character
+     */
+    std::string getCharacterName() const;
 
     /*
      * Returns the amount of player's coins

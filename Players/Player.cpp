@@ -6,19 +6,9 @@ Player::Player(const std::string& playerName, Character someCharacter)
         m_coins(INITIAL_COINS_AMOUNT), m_character(someCharacter)
 {}
 
-std::string Player::getCharacter() const
+Character Player::getCharacter() const
 {
-    switch (m_character) {
-
-        case Character::Wizard:
-            return "Wizard";
-        case Character::Rogue:
-            return "Rogue";
-        case Character::Fighter:
-            return "Fighter";
-        default:
-            return " ";
-    }
+    return m_character;
 }
 
 std::string Player::getName() const
@@ -115,9 +105,24 @@ int Player::getAttackStrength() const
     return m_force + m_level;
 }
 
+std::string Player::getCharacterName() const
+{
+    switch (m_character) {
+
+        case Character::Wizard:
+            return "Wizard";
+        case Character::Rogue:
+            return "Rogue";
+        case Character::Fighter:
+            return "Fighter";
+        default:
+            return " ";
+    }
+}
+
 std::ostream& operator<<(std::ostream& os, const Player& somePlayer)
 {
-    printPlayerDetails(os, somePlayer.m_name, somePlayer.getCharacter(), somePlayer.m_level, somePlayer.m_force,
+    printPlayerDetails(os, somePlayer.m_name, somePlayer.getCharacterName(), somePlayer.m_level, somePlayer.m_force,
                        somePlayer.m_HP.getHP(), somePlayer.m_coins);
     return os;
 }

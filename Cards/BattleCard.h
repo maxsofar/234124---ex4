@@ -5,6 +5,16 @@
 
 class BattleCard : public Card {
 public:
+
+    /*
+     * Handling the player's applyEncounter with Battle card:
+     *
+     * @param player - The player.
+     * @return
+     *      void
+    */
+    void applyEncounter(Player &player) const override;
+
     /*
      * Handles Gang card
      *
@@ -41,7 +51,7 @@ private:
      *
      * @param ostream - I/O stream the info will be forwarded to.
      * @return
-     *      I\O stream
+     *          void
     */
     void print(std::ostream& os) const override;
 

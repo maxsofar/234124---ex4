@@ -71,7 +71,7 @@ private:
      *
      * @param ostream - I/O stream the info will be forwarded to.
      * @return
-     *      I\O stream
+     *          void
     */
     virtual void print(std::ostream& os) const;
 
