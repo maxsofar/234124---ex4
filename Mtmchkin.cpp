@@ -82,7 +82,7 @@ void Mtmchkin::getTeamSize()
         else
         {
             int x = std::stoi(input);
-            if (x < 2 || x > 6) {
+            if (x < TEAM_SIZE_LOWER_BOUND || x > TEAM_SIZE_UPPER_BOUND) {
                 printInvalidTeamSize();
             } else {
                 m_numOfPlayers = x;

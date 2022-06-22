@@ -1,7 +1,8 @@
 #include "Rogue.h"
+#include "../utilities.h"
 
 Rogue::Rogue(const std::string& playerName)
-        : Player(playerName, Character::Rogue)
+        : Player(playerName)
 {}
 
 void Rogue::addCoins(int amount)
@@ -10,4 +11,9 @@ void Rogue::addCoins(int amount)
         return;
     }
     m_coins += LOOT_MULTIPLIER * amount;
+}
+
+void Rogue::print(std::ostream &os) const
+{
+    printPlayerDetails(os, m_name, "Rogue", m_level, m_force,m_HP.getHP(), m_coins);
 }

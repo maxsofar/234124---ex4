@@ -32,5 +32,11 @@ public:
      *      void
     */
     void applyEncounter(Player& player) const override;
+
+private:
+    static const int FORCE_BUFF_COST = 10;
+    static const int FORCE_BUFF_AMOUNT = 1;
+    static const int HP_BUFF_COST = 5;
+    static const int HP_BUFF_AMOUNT = 1;
 };
 #endif //EX4_MERCHANT_H

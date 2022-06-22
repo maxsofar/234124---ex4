@@ -24,6 +24,14 @@ public:
     void addCoins(int amount) override;
 
     /*
+     * Auxiliary printing function
+     *
+     * @return
+     *          void
+     */
+    void print(std::ostream& os) const override;
+
+    /*
      * Default D'tor
      */
     ~Rogue() override = default;
