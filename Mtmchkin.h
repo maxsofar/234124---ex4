@@ -118,6 +118,13 @@ private:
      */
     void checkCard(const std::string& card, int line, bool isGang = false) const;
 
+    /*
+     * Explicitly deleted Copy C'tor and assingment operator overloading
+     */
+    Mtmchkin (const Mtmchkin&) = delete;
+    Mtmchkin& operator=(const Mtmchkin&) = delete;
+
+
 };
 
 #endif /* MTMCHKIN_H_ */
