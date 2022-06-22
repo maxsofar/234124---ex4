@@ -120,6 +120,7 @@ void Mtmchkin::getCardDeck(const string& fileName)
     if (!source) {
         throw(DeckFileNotFound());
     }
+    
     string card;
     int cardCount = 0, gangCount = 0;
     for (; getline(source, card); ++cardCount)
