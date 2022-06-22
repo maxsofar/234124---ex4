@@ -24,6 +24,14 @@ public:
     int getAttackStrength() const override;
 
     /*
+     * Auxiliary printing function
+     *
+     * @return
+     *          void
+     */
+    void print(std::ostream& os) const override;
+
+    /*
      * Default D'tor
      */
     ~Fighter() override = default;

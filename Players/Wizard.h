@@ -15,6 +15,14 @@ public:
     explicit Wizard(const std::string& playerName);
 
     /*
+     * Auxiliary printing function
+     *
+     * @return
+     *          void
+     */
+    void print(std::ostream& os) const override;
+
+    /*
      * Default D'tor
      */
     ~Wizard() override = default;

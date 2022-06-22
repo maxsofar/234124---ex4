@@ -1,15 +1,10 @@
 #include "Player.h"
 #include "../utilities.h"
 
-Player::Player(const std::string& playerName, Character someCharacter)
+Player::Player(const std::string& playerName)
         : m_name(playerName), m_level(INITIAL_LEVEL), m_force(DEFAULT_FORCE), m_HP(HealthPoints()),
-        m_coins(INITIAL_COINS_AMOUNT), m_character(someCharacter)
+        m_coins(INITIAL_COINS_AMOUNT)
 {}
-
-Character Player::getCharacter() const
-{
-    return m_character;
-}
 
 std::string Player::getName() const
 {
@@ -105,24 +100,12 @@ int Player::getAttackStrength() const
     return m_force + m_level;
 }
 
-std::string Player::getCharacterName() const
-{
-    switch (m_character) {
-
-        case Character::Wizard:
-            return "Wizard";
-        case Character::Rogue:
-            return "Rogue";
-        case Character::Fighter:
-            return "Fighter";
-        default:
-            return " ";
-    }
-}
+void Player::print(std::ostream &os) const
+{}
 
 std::ostream& operator<<(std::ostream& os, const Player& somePlayer)
 {
-    printPlayerDetails(os, somePlayer.m_name, somePlayer.getCharacterName(), somePlayer.m_level, somePlayer.m_force,
-                       somePlayer.m_HP.getHP(), somePlayer.m_coins);
+    somePlayer.print(os);
     return os;
 }
+

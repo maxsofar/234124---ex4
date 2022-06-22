@@ -4,18 +4,8 @@
 #include <string>
 #include "HealthPoints.h"
 
-enum class Character{Wizard, Rogue, Fighter};
-
 class Player {
 public:
-
-    /*
-     * Returns the name of the player's character
-     *
-     * @return
-     *      String with name of a character
-     */
-    Character getCharacter() const;
 
     /*
      * Returns the name of the player
@@ -24,14 +14,6 @@ public:
      *      String with name of a player
      */
     std::string getName() const;
-
-    /*
-     * Returns the name of the player's character
-     *
-     * @return
-     *      String with name of a character
-     */
-    std::string getCharacterName() const;
 
     /*
      * Returns the amount of player's coins
@@ -148,20 +130,27 @@ protected:
      * @return
      *      An instance of Player
      */
-    Player(const std::string& playerName, Character someCharacter);
+    explicit Player(const std::string& playerName);
 
     std::string m_name;
     int m_level;
     int m_force;
     HealthPoints m_HP;
     int m_coins;
-    Character m_character;
 
 private:
     static const int DEFAULT_FORCE = 5;
     static const int INITIAL_LEVEL = 1;
     static const int MAX_LEVEL = 10;
     static const int INITIAL_COINS_AMOUNT = 10;
+
+    /*
+     * Auxiliary printing function
+     *
+     * @return
+     *          void
+     */
+    virtual void print(std::ostream& os) const;
 
     /*
      * << operator overloading

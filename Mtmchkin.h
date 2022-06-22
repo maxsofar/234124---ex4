@@ -57,6 +57,8 @@ public:
 private:
     static const int MAX_LEVEL = 10;
     static const int MIN_DECK_SIZE = 5;
+    static const int TEAM_SIZE_LOWER_BOUND = 2;
+    static const int TEAM_SIZE_UPPER_BOUND = 6;
 
     std::deque<std::unique_ptr<Card>> m_cardDeck;
     std::deque<std::unique_ptr<Player>> m_players;
