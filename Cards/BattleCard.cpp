@@ -5,6 +5,7 @@ BattleCard::BattleCard(const CardStats& stats, const std::string& name) : Card(s
 
 void BattleCard::print(std::ostream &os) const
 {
+    printCardDetails(os, m_name);
     printMonsterDetails(os, m_stats.force, m_stats.hpLossOnDefeat,m_stats.loot, false);
     printEndOfCardDetails(os);
 }
