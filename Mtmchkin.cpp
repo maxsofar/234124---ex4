@@ -8,6 +8,7 @@
 
 #define MAX_NAME_LEN 15
 #define TEAM_SIZE_RANGE "23456"
+#define ONE_CARD 1
 
 using std::string;
 using std::unique_ptr;
@@ -120,34 +121,38 @@ void Mtmchkin::getCardDeck(const string& fileName)
     if (!source) {
         throw(DeckFileNotFound());
     }
-    
+
     string card;
     int cardCount = 0, gangCount = 0;
-    for (; getline(source, card); ++cardCount)
+    while (getline(source, card))
     {
+        ++cardCount;
         if (card == "Gang")
         {
             unique_ptr<Gang> gang = unique_ptr<Gang>(new Gang());
             getline(source, card);
 
             while (card != "EndGang") {
-                checkCard(card, cardCount + gangCount + 1, true);
-                gang->setCardStack(m_cardsMap[card]->createInstance());
-                getline(source, card);
                 ++gangCount;
                 ++cardCount;
-                if (cin.eof()) {
-                    throw (DeckFileFormatError(cardCount));
+                checkCard(card, cardCount, true);
+                gang->setCardStack(m_cardsMap[card]->createInstance());
+
+
+                if (!getline(source, card) || cin.eof()) {
+                    throw (DeckFileFormatError(cardCount + ONE_CARD));
                 }
             }
+            ++gangCount;
+            ++cardCount;
             m_cardDeck.push_back(move(gang));
-            gangCount = 0;
+
         } else {
-            checkCard(card, cardCount - gangCount + 1);
+            checkCard(card, cardCount);
             m_cardDeck.push_back(move(m_cardsMap[card]->createInstance()));
         }
     }
-    if (cardCount < MIN_DECK_SIZE) {
+    if (cardCount - gangCount < MIN_DECK_SIZE) {
         throw(DeckFileInvalidSize());
     }
 }
